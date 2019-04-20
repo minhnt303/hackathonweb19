@@ -54,7 +54,6 @@ const UserSchema = new Schema({
 //     pass = null;
 //     console.log("password update: " +password);
 //     MongoClient.connect(uri, function(err, db) {
-//       //const ids = "/"+nameProduct+"/";
 //       if (err) throw err;
 //       var dbo = db.db("weima");
 //       dbo.collection("customer").update({
@@ -82,7 +81,6 @@ const UserSchema = new Schema({
 //xoa
 // function userRemove(id) { // user
 //     MongoClient.connect(uri, function(err, db) {
-//       //const ids = "/"+nameProduct+"/";
 //       if (err) throw err;
 //       const dbo = db.db("3dwebsite");
 //       dbo.collection("user").remove({
