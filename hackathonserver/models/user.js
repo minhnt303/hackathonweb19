@@ -55,7 +55,7 @@ const UserSchema = new Schema({
 //     console.log("password update: " +password);
 //     MongoClient.connect(uri, function(err, db) {
 //       if (err) throw err;
-//       var dbo = db.db("weima");
+//       const dbo = db.db("weima");
 //       dbo.collection("customer").update({
 //         ID: id
 //       }, {
