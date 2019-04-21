@@ -31,6 +31,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Login from './page/Login';
 import Register from './page/Register';
+import CreatePost from './page/CreatePost';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 class App extends Component {
   render() {
@@ -44,6 +45,7 @@ class App extends Component {
           }} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
+          <Route path='/createpost' component={CreatePost} />
         </BrowserRouter>
       </div>
     );

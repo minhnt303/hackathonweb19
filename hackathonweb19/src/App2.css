@@ -1,0 +1,24 @@
+.logoName {
+    padding-left: 20px;
+    font-size: 30px;
+    font-family: 'BillabongW00-Regular', sans-serif;
+    color: hsl(0, 0%, 15%);
+}
+.classLogo {
+    height: 24px;
+    width: 24px;
+    padding-right: 20px;
+    border-right: 1px solid #000;
+    color: hsl(0, 0%, 15%);
+}
+.Search-form {
+    padding-bottom: 10px; 
+}
+.form-control {
+    background-color: whitesmoke;
+}
+.classuserLogo {
+    height: 20px;
+    width: 20px;
+    text-align: right;
+}
