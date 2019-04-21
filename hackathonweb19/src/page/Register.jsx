@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css'
-// import { Container, Row, Col } from 'reactstrap';
+// import { Row, Col } from 'reactstrap';
 import { Container, Input, Button, Form } from 'reactstrap';
 // import axios from 'axios';
 // import config from '../config';
