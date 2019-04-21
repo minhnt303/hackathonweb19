@@ -43,7 +43,7 @@ class Login extends React.Component {
                     </div>
                     <div className="main">
                         <div className="login-form">
-                            <h1 className="logo-name">Webma</h1>
+                            <h1 className="logo-name">Weiba</h1>
                             <Form onSubmit={this.handleSubmit}>
                                 <Input
                                     type='text'

@@ -83,7 +83,7 @@ class Register extends React.Component {
                     </div>
                     <div className="main-register">
                         <div className="register-form">
-                            <h1 className="logo-name">Webma</h1>
+                            <h1 className="logo-name">Weiba</h1>
                             <h3 className="register-text">Đăng ký để xem sản phẩm.</h3>
                             <Form onSubmit={this.handleSubmit}>
                                 <Input
