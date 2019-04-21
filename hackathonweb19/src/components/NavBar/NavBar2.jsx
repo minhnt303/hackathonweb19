@@ -19,7 +19,7 @@ const NavBar = (props) => {
                     </div>
                     </td>
                          
-                    <td style={{textAlign: 'right'}}>
+                    <td style={{textAlign: 'right', paddingBottom: '10px'}}>
                         <img src={userlogin} alt="weima-userlogo" className='classuserLogo' />
                     </td>
                 </tr>
