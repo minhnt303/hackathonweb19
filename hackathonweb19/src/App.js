@@ -30,7 +30,7 @@ import React, { Component } from 'react';
 // import logo from './logo.png';
 import './App.css';
 import Login from './page/Login';
-// import Register from './page/Register';
+import Register from './page/Register';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 class App extends Component {
   render() {
@@ -43,7 +43,7 @@ class App extends Component {
             )
           }} />
           <Route path='/login' component={Login} />
-          {/* <Route path='/register' component={Register} /> */}
+          <Route path='/register' component={Register} />
         </BrowserRouter>
       </div>
     );

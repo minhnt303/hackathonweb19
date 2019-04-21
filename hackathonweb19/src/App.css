@@ -32,14 +32,15 @@
   }
 } */
 .Login {
-  background-color: #fafafa;
+    background-color: #fafafa;
 }
+
 .classLogo {
     height: 24px;
     width: 24px;
     padding-right: 20px;
     border-right: 1px solid #000;
-    color:hsl(0, 0%, 15%);
+    color: hsl(0, 0%, 15%);
 }
 
 .navbar {
@@ -50,7 +51,8 @@
 }
 
 .navbar-area {
-    margin-left: 138.5px;
+    margin-left: 10%;
+    margin-right: 10%;
     padding: 26px 20px;
     padding-bottom: 0px;
     justify-content: center;
@@ -69,14 +71,23 @@ td {
     padding-left: 20px;
     font-size: 30px;
     font-family: 'BillabongW00-Regular', sans-serif;
-    color:hsl(0, 0%, 15%);
+    color: hsl(0, 0%, 15%);
 }
-.logo-name{
-  font-size: 70px;
-  margin-bottom: 0px;
-  font-family: 'BillabongW00-Regular', sans-serif;
-  color:hsl(0, 0%, 15%);
+
+.logo-name {
+    font-size: 70px;
+    margin-bottom: 0px;
+    height: 100px;
+    font-family: 'BillabongW00-Regular', sans-serif;
+    color: hsl(0, 0%, 15%);
 }
+
+.register-text {
+    margin-top: 0px;
+    color: hsl(0, 0%, 60%);
+    font-weight: 600;
+}
+
 @font-face {
     font-family: "BillabongW00-Regular";
     src: url("//db.onlinewebfonts.com/t/6d32b8e06f40fb7698cfb714b9e7975d.eot");
@@ -91,6 +102,10 @@ td {
     height: 580px;
 }
 
+.main-register {
+    height: 900px;
+}
+
 .login-form {
     border: 1px solid rgba(0, 0, 0, .0975);
     background-color: white;
@@ -101,21 +116,101 @@ td {
     text-align: center;
 }
 
-Input{
-  padding-left:10px;
-  width: 300px;
-  height: 24px;
-  border-radius: 4px;
-  border: 1px solid hsl(0, 0%, 88%);
-  background-color: #fafafa;
+.register-form {
+    border: 1px solid rgba(0, 0, 0, .0975);
+    background-color: white;
+    margin: 30px auto 0;
+    width: 30%;
+    justify-content: center;
+    text-align: center;
 }
 
-.loginButton{
-  width: 312px;
-  height: 28px;
-  border-radius: 4px;
-  border: 1px solid hsl(209, 86%, 58%);
-  background-color: hsl(209, 86%, 58%);
-  color: #ffffff;
-  font-weight: bold;
+.register-of-login {
+    border: 1px solid rgba(0, 0, 0, .0975);
+    background-color: white;
+    margin: 30px auto 0;
+    padding-top: 20px;
+    justify-content: center;
+    height: 8%;
+    width: 30%;
+    text-align: center;
+}
+
+.login-of-register {
+    border: 1px solid rgba(0, 0, 0, .0975);
+    background-color: white;
+    margin: 30px auto 0;
+    padding-top: 20px;
+    justify-content: center;
+    height: 5%;
+    width: 30%;
+    text-align: center;
+}
+
+.register-text2 {
+    color: hsl(0, 0%, 60%);
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 14px;
+}
+
+.register-text2 a {
+    color: hsl(0, 0%, 60%);
+    text-decoration: none;
+    font-weight: 60%;
+}
+
+.donthaveid {
+    color: hsl(0, 0%, 60%);
+}
+
+.registerlink {
+    color: hsl(210, 100%, 21%);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+Input {
+    padding-left: 10px;
+    width: 300px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid hsl(0, 0%, 88%);
+    background-color: #fafafa;
+}
+
+.loginButton {
+    width: 312px;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid hsl(209, 86%, 58%);
+    background-color: hsl(209, 86%, 58%);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+ul {
+    width: 100%;
+    list-style-type: none;
+    text-align: center;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    width: 100%;
+    display: block;
+    color: hsl(210, 100%, 21%);
+    text-align: center;
+    padding-top: 60px;
+    padding-right: 60px;
+    text-decoration: none;
+}
+
+.footer {
+    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
