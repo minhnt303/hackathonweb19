@@ -51,7 +51,7 @@ const productSchema = new Schema({
 //     MongoClient.connect(uri, function(err, db) {
     
 //       if (err) throw err;
-//       var dbo = db.db("weima");
+//       const dbo = db.db("weima");
 //       dbo.collection("product").remove({
 //         ID: id
 //       });
