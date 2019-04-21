@@ -4,11 +4,8 @@ const mongoose = require('mongoose');
 // uri = "link";connect online
 
 //const pass;
-const Schema = mongoose.Schema;
-const UserSchema = new Schema({
-    ID:String,
-    fistName:String,
-    lastName:String,
+const UserSchema = new mongoose.Schema({
+    username:String,
     email:String,
     password:String,
     zaloId:String,
