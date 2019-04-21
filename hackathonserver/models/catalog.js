@@ -7,6 +7,6 @@ const catalogSchema =new Schema({
     parent_Id:String,
     sort_order:String,//ví trí sắp xếp hiển thị(phân vân bỏ)
 });
-
+const catalogModel =mongoose.model('catalog',catalogSchema);
 
 module.exports= catalogModel;
