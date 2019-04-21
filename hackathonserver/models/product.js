@@ -59,6 +59,7 @@ const productSchema = new Schema({
 //     });
 //   }
 
+const productModel = mongoose.model('product',productSchema);
 // module.exports.updateProductByID =updateProductByID;
 // module.exports.removeProductByID =removeProductByID;
  module.exports =productModel;
