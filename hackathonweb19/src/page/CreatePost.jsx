@@ -194,7 +194,7 @@ class CreatePost extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         {/* <label>Ảnh sản phẩm</label> */}
-                                        <Input type="file" className="image" id="images" name="images[]" onChange={(e) => { this.handleInputChangeImage(e.target.value) }} style={{ height: '45px', backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} multiple />
+                                        <Input type="file" className="image" id="images" name="images[]" onChange={(e) => { this.handleInputChangeImage(e.target.value) }} style={{ height: '45px', backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)', paddingTop:"6px", paddingLeft:"6px" }} multiple />
                                     </div>
                                     <div className="row" id="image_preview"></div>
                                     <Button type="submit" className="btn btn-danger">Đăng sản phẩm</Button>
