@@ -1,15 +1,60 @@
 import React from 'react';
 import '../App.css'
-// import { Container, Row, Col } from 'reactstrap';
+import { Input,Button,Form } from 'reactstrap';
 // import axios from 'axios';
-// import config from '../config';
+import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar2'
 class CreatePost extends React.Component {
     state = {
-       
+       name:'',
+       price:'',
+       discount:'',
+       info:'',
+       catalog:'',
+       image:'',
     };
-
+    handleInputChangeName = (value)=>{
+        this.setState({
+            name: value,
+        })
+        console.log(this.state)
+    }
+    handleInputChangePrice = (value)=>{
+        this.setState({
+            price: value,
+        })
+        console.log(this.state)
+    }
+    handleInputChangeDiscount = (value)=>{
+        this.setState({
+            discount: value,
+        })
+        console.log(this.state)
+    }
+    handleInputChangeInfo = (value)=>{
+        this.setState({
+            info: value,
+        })
+        console.log(this.state)
+    }
+    handleInputChangeCatalog = (value)=>{
+        this.setState({
+            catalog: value,
+        })
+        console.log(this.state)
+    }
+    handleInputChangeImage = (value)=>{
+        this.setState({
+            image: value,
+        })
+        console.log(this.state)
+    }
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(this.state);
+        console.log(config.baseUrl);
+    }
     render() {
         return (
             <div className='Login' style={{backgroundColor: '#fafafa', height: '635px'}}>
@@ -64,41 +109,41 @@ class CreatePost extends React.Component {
                         <div className=' d-flex justify-content-between'>
                              <div className="row w-50 m-auto">
                                 <div className='col'>
-                                    <form className="w-100">
+                                    <Form className="w-100" onSubmit={this.handleSubmit}>
                                         <div className="form-group">
                                             {/* <label>Tên sản phẩm</label> */}
-                                            <input type="product" className="form-control" id="product"  placeholder="Tên sản phẩm"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                            <Input type="text" className="name" id="product"onChange={(e) => { this.handleInputChangeName(e.target.value) }}  placeholder="Tên sản phẩm"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
                                         </div>
                                         <div className="form-group">
                                             {/* <label>Giá sản phẩm</label> */}
-                                            <input type="price" className="form-control" id="price"  placeholder="Giá sản phẩm (VND)"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                            <Input type="number" className="price" id="price" onChange={(e) => { this.handleInputChangePrice(e.target.value) }} placeholder="Giá sản phẩm (VND)"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
                                         </div>
                                         <div className="form-group">
                                             {/* <label>Chiết khấu</label> */}
-                                            <input type="discount" className="form-control" id="discount"  placeholder="Chiết khấu (%)"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                            <Input type="number" className="discount" id="discount" onChange={(e) => { this.handleInputChangeDiscount(e.target.value) }} placeholder="Chiết khấu (%)"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
                                         </div>
                                         <div className="form-group">
                                             {/* <label>Chiết khấu</label> */}
-                                            <input type="text-area" className="form-control" id="info"  placeholder="Thông tin về sản phẩm"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                            <Input type="textarea" className="info" id="info" onChange={(e) => { this.handleInputChangeInfo(e.target.value) }} placeholder="Thông tin về sản phẩm"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
                                         </div>
                                         <div className="form-group">
                                             {/* <label>Danh mục</label> */}
-                                            <select className="form-control" id="exampleFormControlSelect1" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }}>
+                                            <Input type="select" className="form-control" onChange={(e) => { this.handleInputChangeCatalog(e.target.value) }} id="exampleFormControlSelect1" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }}>
                                                 <option>Danh mục</option>
                                                 <option>Điện tử</option>
                                                 <option>Thời trang</option>
                                                 <option>Nông Sản</option>
                                                 <option>Thực phẩm</option>
                                                 <option>Hàng Hóa</option>
-                                             </select>
+                                             </Input>
                                         </div>
                                         <div className="form-group">
                                             {/* <label>Ảnh sản phẩm</label> */}
-                                            <input type="file" className="form-control" id="images" name="images[]" style={{height: '45px',backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} multiple/>
+                                            <Input type="file" className="image" id="images" name="images[]"onChange={(e) => { this.handleInputChangeImage(e.target.value) }}  style={{height: '45px',backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} multiple/>
                                          </div>
                                         <div className="row" id="image_preview"></div>
-                                        <button type="submit" className="btn btn-danger">Submit</button>
-                                     </form>
+                                        <Button type="submit" className="btn btn-danger">Đăng sản phẩm</Button>
+                                     </Form>
                                 </div>
                              </div>
                         </div>
