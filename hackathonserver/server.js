@@ -1,0 +1,46 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const path = require('path');
+const cors = require('cors');
+const expressSession = require('express-session');
+const userModel = require('./models/user');
+mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('connect to mongodb success')
+
+    const app = express();
+
+    app.use(express.static('public'));
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(bodyParser.json());
+
+    app.use(cors({
+        origin: ['http://localhost:3000']
+      }))
+
+    app.get("/api/user", async (req, res) => {
+        userModel.find({}, function (err, user) {
+            if (err) {
+                res.send('something aSSADASD')
+                next();
+            }
+            res.json(user)
+        })
+    });
+
+    app.post("/api/user", async (req, res) => {
+        console.log(req.body);
+        var user = new userModel(req.body);
+        user.save(function (err, user) {
+            res.json(user)
+        })
+    });
+
+    app.listen(3001, (err) => {
+        if (err) throw err;
+        console.log('Server is listen on post 3001..')  
+    });
+});

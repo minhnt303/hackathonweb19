@@ -1,9 +1,9 @@
 import React from 'react';
 import '../App.css'
 // import { Row, Col } from 'reactstrap';
-import { Container, Input, Button, Form } from 'reactstrap';
-// import axios from 'axios';
-// import config from '../config';
+import { Input, Button, Form } from 'reactstrap';
+import axios from 'axios';
+import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar'
 class Register extends React.Component {
@@ -69,13 +69,66 @@ class Register extends React.Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         console.log(this.state);
+        console.log(config.baseUrl);
 
+        axios.get(`${config.baseUrl}/api/user`)
+            .then(response => {
+                let data = response.data;
+                let valid = true;
+                console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    console.log(data[i].email, this.state.email)
+                    if (data[i].email === this.state.email) {
+                        console.log('asdas');
+                        valid = false;
+                        break;
+                    }
+                    //  if(data[i].email !== this.state.email) {
+                    //     // axios({
+                    //     //             url: `${config.baseUrl}/api/user`,
+                    //     //             method: 'post',
+                    //     //             data: {
+                    //     //                 email: this.state.email, password: this.state.password, username: this.state.username,
+                    //     //                 zaloId: this.state.zaloid, phone: this.state.phone, fbId: this.state.facebookid, address: this.state.address
+                    //     //             },
+                    //     //         })
+                    //     //             .then((response) => {
+                    //     //                 console.log(response.data);
+                    //     //             })
+                    //     //             .catch((error) => {
+                    //     //                 console.log(error);
+                    //     //             });
+                    //     //             break;
+                    //     console.log('ashdghsad')
+                    // }
+                }
+
+                if (valid === false) {
+                    console.log('Register false')
+                } else {
+                    console.log('Register success')
+                    axios({
+                        url: `${config.baseUrl}/api/user`,
+                        method: 'post',
+                        data: {
+                            email: this.state.email, password: this.state.password, username: this.state.username,
+                            zaloId: this.state.zaloid, phone: this.state.phone, fbId: this.state.facebookid, address: this.state.address
+                        },
+                    })
+                        .then((response) => {
+                            console.log(response.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
+            })
+            .catch(error => console.log(error));
     }
 
     render() {
         return (
             <div className='Login'>
-                <Container>
                     <div className="navbar">
                         <div className="navbar-area">
                             <NavBar />
@@ -139,7 +192,6 @@ class Register extends React.Component {
                             </ul>
                         </div>
                     </div>
-                </Container>
             </div >
         )
     }

@@ -33,12 +33,14 @@
 } */
 .Login {
     background-color: #fafafa;
+    width: 100%;
 }
 
 .classLogo {
-    height: 24px;
-    width: 24px;
+    height: 25px;
+    width: 45px;
     padding-right: 20px;
+    margin-right: 20px;
     border-right: 1px solid #000;
     color: hsl(0, 0%, 15%);
 }
@@ -53,7 +55,6 @@
 .navbar-area {
     margin-left: 10%;
     margin-right: 10%;
-    padding: 26px 20px;
     padding-bottom: 0px;
     justify-content: center;
 }
@@ -64,12 +65,15 @@
 }
 
 td {
+    margin-top: 100px;
     width: 505px;
 }
-
+.logotd{
+    padding-top: 12px;
+}
 .logoName {
-    padding-left: 20px;
     font-size: 30px;
+    justify-content: center;
     font-family: 'BillabongW00-Regular', sans-serif;
     color: hsl(0, 0%, 15%);
 }

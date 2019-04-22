@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
     name: String,
-    user_ID: {
+    user_Id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
@@ -14,7 +14,6 @@ const productSchema = new mongoose.Schema({
         ref: 'Catalog'
     },
     price: Number,
-    type: String,
     info: String,
     image_link: String,
     // status : Number,
@@ -22,8 +21,14 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: new Date(),
     },
-    view: Number,
-    like: Number,
+    view: {
+        type: Number,
+        default: 0,
+    },
+    like: {
+        type: Number,
+        default: 0,
+    },
 });
 
 // function updateProductByID(id, name, info, price, link,url,type,catalog_Id) { // user

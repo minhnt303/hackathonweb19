@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
     avatarUrl:String,
     createdAt:{
         type:Date,
-        default:new Data(),
+        default:new Date(),
     },
     address:String,
 });
@@ -86,10 +86,10 @@ const UserSchema = new mongoose.Schema({
 //       db.close();
 //     });
 //   }
-const UserModel = mongoose.model('User',UserSchema);
+const userModel = mongoose.model('User',UserSchema);
 
 
-module.exports = UserModel;
+module.exports = userModel;
 // module.exports.userCollection = userCollection;
 // module.exports.userUpdate = userUpdate;
 // module.exports.useromerRemove = userRemove;

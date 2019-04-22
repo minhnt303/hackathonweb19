@@ -6,9 +6,8 @@ const NavBar = (props) => {
         <table>
             <tbody>
                 <tr>
-                    <td>
-                        <img src={logo} alt="weima-logo" className='classLogo' />
-                        <span className="logoName">Weiba</span>
+                    <td className="logotd">
+                        <span className="logoName"><img src={logo} alt="weima-logo" className='classLogo' />Weiba</span>
                     </td>
                     <td>
                         <div className="user">login register</div>

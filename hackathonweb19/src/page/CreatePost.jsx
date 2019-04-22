@@ -1,12 +1,11 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 // import '../App.css'
 // import { Container, Row, Col } from 'reactstrap';
 import { Container  } from 'reactstrap';
 // import axios from 'axios';
 // import config from '../config';
 import { withRouter } from 'react-router-dom';
-import NavBar from '../components/NavBar/NavBar2'
+// import NavBar2 from '../components/NavBar/NavBar2'
 class CreatePost extends React.Component {
     state = {
        
@@ -17,7 +16,7 @@ class CreatePost extends React.Component {
             <div className='Login' style={{backgroundColor: '#fafafa', height: '635px'}}>
                 <div className="navBar">
                     <div className="navbar-area">
-                        <NavBar />
+                        {/* <NavBar2 /> */}
                     </div>
                 </div>
                 <Container>
