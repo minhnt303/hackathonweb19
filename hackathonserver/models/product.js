@@ -5,15 +5,18 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
     name: String,
-    user_Id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    catalog_Id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Catalog'
-    },
+    // user_Id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User'
+    // },
+    user_Id: String,
+    // catalog_Id: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Catalog'
+    // },
+    catalog_Id: String,
     price: Number,
+    discount: Number,
     info: String,
     image_link: String,
     // status : Number,

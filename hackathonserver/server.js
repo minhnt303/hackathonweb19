@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const expressSession = require('express-session');
 const userModel = require('./models/user');
+const productModel = require('./models/product');
 mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
     if (err) {
         throw err;
@@ -36,6 +37,24 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         var user = new userModel(req.body);
         user.save(function (err, user) {
             res.json(user)
+        })
+    });
+
+    app.get("/api/product",async (req, res) => {
+        productModel.find({}, function (err, product) {
+            if (err) {
+                res.send('something aSSADASD')
+                next();
+            }
+            res.json(product)
+        })
+    });
+
+    app.post("/api/product", async (req, res) => {
+        console.log(req.body);
+        var product = new productModel(req.body);
+        product.save(function (err, product) {
+            res.json(product)
         })
     });
 
