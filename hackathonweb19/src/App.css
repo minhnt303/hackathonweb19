@@ -37,6 +37,8 @@
 }
 
 .classLogo {
+    position: relative;
+    bottom: 2px;
     height: 25px;
     width: 45px;
     padding-right: 20px;
@@ -45,13 +47,19 @@
     color: hsl(0, 0%, 15%);
 }
 
-.navbar {
+.navbar2 {
     width: 100%;
-    height: 77px;
+    height: 70px;
     border-bottom: 1px solid rgba(0, 0, 0, .0975);
     background-color: #ffffff;
 }
 
+.navbar {
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid rgba(0, 0, 0, .0975);
+    background-color: #ffffff;
+}
 .navbar-area {
     margin-left: 10%;
     margin-right: 10%;
@@ -64,7 +72,7 @@
     justify-content: center;
 }
 
-td {
+.NavBar td {
     margin-top: 100px;
     width: 505px;
 }
@@ -242,4 +250,39 @@ li a:hover{
     width: 100%;
     margin-left: 10%;
     margin-right: 10%;
+}
+
+.fong {
+    font-family: 'BillabongW00-Regular',sans-serif;
+    font-weight: 400;
+    font-size: 65px;
+    padding-left: 15%;
+    height: 50px;
+}
+
+.classuserLogo {
+    height: 25px;
+    width: 25px;
+    text-align: right;
+}
+
+.Search-form {
+    padding-bottom: 10px; 
+    width: 110%;
+    text-align: center;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.search{
+    background-color: #000;
+}
+.NavBar2 td{
+    width: 400px;
+}
+
+.container{
+    border: 1px solid rgba(0, 0, 0, .0975);
+    width: 900px;
+    height: 75%;
+    background-color: white;
 }

@@ -5,7 +5,7 @@ const NavBar = (props) => {
     return (
         <table>
             <tbody>
-                <tr>
+                <tr className="NavBar">
                     <td className="logotd">
                         <span className="logoName"><img src={logo} alt="weima-logo" className='classLogo' />Weiba</span>
                     </td>
