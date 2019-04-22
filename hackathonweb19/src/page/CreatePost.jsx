@@ -76,7 +76,11 @@ class CreatePost extends React.Component {
                                         <div className="form-group">
                                             {/* <label>Chiết khấu</label> */}
                                             <input type="discount" className="form-control" id="discount"  placeholder="Chiết khấu (%)"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
-                                         </div>
+                                        </div>
+                                        <div className="form-group">
+                                            {/* <label>Chiết khấu</label> */}
+                                            <input type="text-area" className="form-control" id="info"  placeholder="Thông tin về sản phẩm"style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                        </div>
                                         <div className="form-group">
                                             {/* <label>Danh mục</label> */}
                                             <select className="form-control" id="exampleFormControlSelect1" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }}>
