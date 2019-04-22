@@ -65,48 +65,32 @@ class CreatePost extends React.Component {
                 //     })
                 //     .catch(error => console.log(error));
                 console.log(localStorage.getItem('user'))
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i].email === localStorage.getItem('user')) {
-                        console.log('email');
-                        console.log(data[i]._id)
-                        axios({
-                            url: `${config.baseUrl}/api/product`,
-                            method: 'post',
-                            data: {
-                                name: this.state.name, price: this.state.price, user_Id: data[i]._id,
-                                catalog_Id: this.state.catalog, info: this.state.info, image_link: this.state.image,discount: this.state.discount
-                            },
-                        })
-                            .then((response) => {
-                                console.log(response.data);
+                if (this.state.name === '' || this.state.price === '' || this.state.info === '' ||
+                    this.state.image === '' || this.state.discount === '' || this.state.catalog === '') {
+                    console.log('Post false')
+                } else {
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].email === localStorage.getItem('user')) {
+                            console.log('email');
+                            console.log(data[i]._id)
+                            axios({
+                                url: `${config.baseUrl}/api/product`,
+                                method: 'post',
+                                data: {
+                                    name: this.state.name, price: this.state.price, user_Id: data[i]._id,
+                                    catalog_Id: this.state.catalog, info: this.state.info, image_link: this.state.image, discount: this.state.discount
+                                },
                             })
-                            .catch((error) => {
-                                console.log(error);
-                            });
-                        break;
+                                .then((response) => {
+                                    console.log(response.data);
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
+                            break;
+                        }
                     }
                 }
-
-                // if (valid === false) {
-                //     console.log('Register false')
-                // } else {
-                //     console.log('Register success')
-                //     localStorage.setItem('user', this.state.email)
-                //     axios({
-                //         url: `${config.baseUrl}/api/user`,
-                //         method: 'post',
-                //         data: {
-                //             email: this.state.email, password: this.state.password, username: this.state.username,
-                //             zaloId: this.state.zaloid, phone: this.state.phone, fbId: this.state.facebookid, address: this.state.address
-                //         },
-                //     })
-                //         .then((response) => {
-                //             console.log(response.data);
-                //         })
-                //         .catch((error) => {
-                //             console.log(error);
-                //         });
-                // }
             })
             .catch(error => console.log(error));
     }
@@ -194,7 +178,7 @@ class CreatePost extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         {/* <label>Ảnh sản phẩm</label> */}
-                                        <Input type="file" className="image" id="images" name="images[]" onChange={(e) => { this.handleInputChangeImage(e.target.value) }} style={{ height: '45px', backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)', paddingTop:"6px", paddingLeft:"6px" }} multiple />
+                                        <Input type="file" className="image" id="images" name="images[]" onChange={(e) => { this.handleInputChangeImage(e.target.value) }} style={{ height: '45px', backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)', paddingTop: "6px", paddingLeft: "6px" }} multiple />
                                     </div>
                                     <div className="row" id="image_preview"></div>
                                     <Button type="submit" className="btn btn-danger">Đăng sản phẩm</Button>

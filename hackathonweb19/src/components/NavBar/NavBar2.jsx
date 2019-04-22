@@ -23,7 +23,7 @@ const NavBar = (props) => {
 
                     <td style={{ textAlign: 'right', paddingBottom: '10px' }}>
                         <a href="http://localhost:3000"><img src={portlogo} alt="weima-userlogo" className='classuserLogo' /></a>
-                        <img src={userlogo} alt="weima-userlogo" className='classuserLogo' style={{marginLeft: "20px"}}/>
+                        <a href="http://localhost:3000/profile"><img src={userlogo} alt="weima-userlogo" className='classuserLogo' style={{marginLeft: "20px"}}/></a>
                     </td>
                 </tr>
             </tbody>
