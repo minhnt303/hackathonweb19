@@ -60,6 +60,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, .0975);
     background-color: #ffffff;
 }
+
 .navbar-area {
     margin-left: 10%;
     margin-right: 10%;
@@ -76,9 +77,11 @@
     margin-top: 100px;
     width: 505px;
 }
-.logotd{
+
+.logotd {
     padding-top: 12px;
 }
+
 .logoName {
     font-size: 30px;
     justify-content: center;
@@ -161,12 +164,12 @@
     text-align: center;
 }
 
-.register-of-login a:hover{
+.register-of-login a:hover {
     text-decoration: none;
     color: hsl(209, 86%, 58%);
 }
 
-.login-of-register a:hover{
+.login-of-register a:hover {
     text-decoration: none;
     color: hsl(209, 86%, 58%);
 }
@@ -181,6 +184,7 @@
 .register-text2 a {
     color: hsl(0, 0%, 60%);
 }
+
 .register-text2 a:hover {
     color: hsl(0, 0%, 60%);
 }
@@ -204,9 +208,10 @@
     background-color: #fafafa;
 } */
 
-Form{
+Form {
     margin: 15px 30px;
 }
+
 .loginButton {
     width: 324px;
     height: 38px;
@@ -214,7 +219,7 @@ Form{
     color: #ffffff;
 }
 
-.registerButton{
+.registerButton {
     width: 324px;
     height: 38px;
     border-radius: 4px;
@@ -231,7 +236,8 @@ li {
     float: left;
 }
 
-li a, li span{
+li a,
+li span {
     width: 100%;
     display: block;
     color: hsl(210, 100%, 21%);
@@ -241,7 +247,7 @@ li a, li span{
     text-decoration: none;
 }
 
-li a:hover{
+li a:hover {
     color: hsl(210, 100%, 21%);
     text-decoration: none;
 }
@@ -253,7 +259,7 @@ li a:hover{
 }
 
 .fong {
-    font-family: 'BillabongW00-Regular',sans-serif;
+    font-family: 'BillabongW00-Regular', sans-serif;
     font-weight: 400;
     font-size: 65px;
     padding-left: 15%;
@@ -267,22 +273,46 @@ li a:hover{
 }
 
 .Search-form {
-    padding-bottom: 10px; 
+    padding-bottom: 10px;
     width: 110%;
     text-align: center;
     margin-left: 0px;
     margin-right: 0px;
 }
-.search{
+
+.search {
     background-color: #000;
 }
-.NavBar2 td{
+
+.NavBar2 td {
     width: 400px;
 }
 
-.container{
+.container {
     border: 1px solid rgba(0, 0, 0, .0975);
     width: 900px;
     height: 85%;
-    background-color: white;
+}
+
+.profileMain {
+    width: 100%;
+    height: 600px;
+    padding-top: 50px;
+    padding-right: 60px;
+    padding-left: 60px;
+    /* background-color: white; */
+}
+
+.userProfileImage {
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, .0975);
+}
+
+.facebooklink{
+    color:hsl(0, 0%, 15%);
+}
+.facebooklink:hover{
+    color: hsl(0, 0%, 15%);
+    text-decoration: none;
 }

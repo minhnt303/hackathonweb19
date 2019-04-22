@@ -44,9 +44,9 @@ class Login extends React.Component {
                 }
 
                 if (valid === false) {
-                    console.log('Register false')
+                    console.log('Login false')
                 } else {
-                    console.log('Register success')
+                    console.log('Login success')
                     localStorage.setItem('user', this.state.email)
                 }
             })

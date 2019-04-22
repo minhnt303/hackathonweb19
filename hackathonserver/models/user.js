@@ -11,7 +11,10 @@ const UserSchema = new mongoose.Schema({
     zaloId:String,
     phone:String,
     fbId:String,
-    avatarUrl:String,
+    avatarUrl:{
+        type:String,
+        default:'https://www.malverninternational.com/wp-content/uploads/2016/12/Male-Avatar.png',
+    },
     createdAt:{
         type:Date,
         default:new Date(),
