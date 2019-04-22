@@ -79,14 +79,16 @@ td {
 }
 
 .logo-name {
-    font-size: 70px;
+    font-size: 90px;
     margin-bottom: 0px;
-    height: 100px;
+    margin-top: 30px;
+    height: 80px;
     font-family: 'BillabongW00-Regular', sans-serif;
     color: hsl(0, 0%, 15%);
 }
 
 .register-text {
+    font-size: 17px;
     margin-top: 0px;
     color: hsl(0, 0%, 60%);
     font-weight: 600;
@@ -115,7 +117,7 @@ td {
     background-color: white;
     margin: 30px auto 0;
     justify-content: center;
-    height: 56%;
+    height: 53%;
     width: 30%;
     text-align: center;
 }
@@ -123,7 +125,7 @@ td {
 .register-form {
     border: 1px solid rgba(0, 0, 0, .0975);
     background-color: white;
-    margin: 30px auto 0;
+    margin: 20px auto 0;
     width: 30%;
     justify-content: center;
     text-align: center;
@@ -135,7 +137,7 @@ td {
     margin: 30px auto 0;
     padding-top: 20px;
     justify-content: center;
-    height: 8%;
+    height: 70px;
     width: 30%;
     text-align: center;
 }
@@ -146,9 +148,19 @@ td {
     margin: 30px auto 0;
     padding-top: 20px;
     justify-content: center;
-    height: 5%;
+    height: 70px;
     width: 30%;
     text-align: center;
+}
+
+.register-of-login a:hover{
+    text-decoration: none;
+    color: hsl(209, 86%, 58%);
+}
+
+.login-of-register a:hover{
+    text-decoration: none;
+    color: hsl(209, 86%, 58%);
 }
 
 .register-text2 {
@@ -160,37 +172,45 @@ td {
 
 .register-text2 a {
     color: hsl(0, 0%, 60%);
-    text-decoration: none;
-    font-weight: 60%;
 }
-
-.donthaveid {
+.register-text2 a:hover {
     color: hsl(0, 0%, 60%);
 }
 
+.donthaveid {
+    color: hsl(0, 0%, 15%);
+}
+
 .registerlink {
-    color: hsl(210, 100%, 21%);
-    font-weight: 600;
+    color: hsl(209, 86%, 58%);
+    font-weight: 400;
     text-decoration: none;
 }
 
-Input {
+/* Input {
     padding-left: 10px;
-    width: 300px;
+    width: 100px;
     height: 24px;
     border-radius: 4px;
     border: 1px solid hsl(0, 0%, 88%);
     background-color: #fafafa;
+} */
+
+Form{
+    margin: 15px 30px;
+}
+.loginButton {
+    width: 324px;
+    height: 38px;
+    border-radius: 4px;
+    color: #ffffff;
 }
 
-.loginButton {
-    width: 312px;
-    height: 28px;
+.registerButton{
+    width: 324px;
+    height: 38px;
     border-radius: 4px;
-    border: 1px solid hsl(209, 86%, 58%);
-    background-color: hsl(209, 86%, 58%);
     color: #ffffff;
-    font-weight: bold;
 }
 
 ul {
@@ -203,13 +223,18 @@ li {
     float: left;
 }
 
-li a {
+li a, li span{
     width: 100%;
     display: block;
     color: hsl(210, 100%, 21%);
     text-align: center;
     padding-top: 60px;
-    padding-right: 60px;
+    padding-right: 54px;
+    text-decoration: none;
+}
+
+li a:hover{
+    color: hsl(210, 100%, 21%);
     text-decoration: none;
 }
 
