@@ -144,7 +144,7 @@ class CreatePost extends React.Component {
                 <div style={{ height: 18 }}></div>
                 <div className='container' style={{ width: "900px" , backgroundColor:'white'}}>
                     <div style={{ height: 18 }}></div>
-                    <h1 className='mt-3 mb-2 fong' >Đăng bài</h1>
+                    <h1 className='mt-3 mb-2 fong' >CreatePost</h1> {/*Không được sửa do lỗi font khi viết tiếng việt*/}
                     <div className=' d-flex justify-content-between'>
                         <div className="row w-50 m-auto">
                             <div className='col'>
