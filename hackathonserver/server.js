@@ -82,6 +82,19 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         }
     })
 
+    app.get("/updatepasswordprofile/:userId/:password", async (req, res) => {
+        const { userId, password } = req.params;
+        console.log(userId, password);
+        const existedUser = await userModel.findById(userId).exec();
+        if (!existedUser) {
+            console.log(1)
+            res.status(404).end('User not found');
+        } else {
+            await userModel.findByIdAndUpdate(userId, { $set: { password: password } }).exec();
+            res.status(200).end('Update success')
+        }
+    })
+
     app.listen(3001, (err) => {
         if (err) throw err;
         console.log('Server is listen on post 3001..')

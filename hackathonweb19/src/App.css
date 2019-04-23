@@ -302,5 +302,18 @@ li a:hover {
 
 .row2:hover{
     border-left: 2px solid rgba(0, 0, 0, .0975) !important;
-    background-color: rgba(0, 0, 0, .02)
+    background-color: rgba(0, 0, 0, .02);
+    text-decoration: none;
+}
+.row2link:hover{
+    text-decoration: none;
+}
+
+.passwordeditprofilemain{
+    background-color: #fafafa;
+    /* border: 1px solid rgba(0, 0, 0, .0975); */
+    height: 360px;
+    margin-top:5%;
+    margin-left:20%;
+    margin-right:20%;
 }

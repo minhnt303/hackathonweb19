@@ -34,6 +34,7 @@ import Register from './page/Register';
 import UserProfile from './page/UserProfile';
 import CreatePost from './page/CreatePost';
 import EditProfile from './page/EditProfile';
+import PasswordChange from './page/PasswordChange'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 class App extends Component {
   render() {
@@ -50,6 +51,7 @@ class App extends Component {
           <Route path='/createpost' component={CreatePost} />
           <Route path='/profile' component={UserProfile} />
           <Route path='/editprofile' component={EditProfile} />
+          <Route path='/password/change' component={PasswordChange} />
         </BrowserRouter>
       </div>
     );
