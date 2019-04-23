@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
 
     app.use(cors({
         origin: ['http://localhost:3000']
-      }))
+    }))
 
     app.get("/api/user", async (req, res) => {
         userModel.find({}, function (err, user) {
@@ -40,7 +40,7 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         })
     });
 
-    app.get("/api/product",async (req, res) => {
+    app.get("/api/product", async (req, res) => {
         // productModel.find({}, function (err, product) {
         //     if (err) {
         //         res.send('something aSSADASD')
@@ -69,8 +69,21 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         })
     });
 
+    app.get("/updateprofile/:userId/:username&:facebooid&:zaloid&:phone&:address", async (req, res) => {
+        const { userId, username, facebooid, zaloid, phone, address } = req.params;
+        console.log(userId, username, facebooid, zaloid, phone, address);
+        const existedUser = await userModel.findById(userId).exec();
+        if (!existedUser) {
+            console.log(1)
+            res.status(404).end('User not found');
+        } else {
+            await userModel.findByIdAndUpdate(userId, { $set: { username: username, fbId: facebooid, zaloId: zaloid, phone: phone, address: address } }).exec();
+            res.status(200).end('Update success')
+        }
+    })
+
     app.listen(3001, (err) => {
         if (err) throw err;
-        console.log('Server is listen on post 3001..')  
+        console.log('Server is listen on post 3001..')
     });
 });

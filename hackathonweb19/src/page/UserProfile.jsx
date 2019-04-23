@@ -75,23 +75,27 @@ class UserProfile extends React.Component {
                 <div className="profileMain">
                     <div className="profileArea">
                         {/* <Container> */}
-                        <Row style={{borderBottom: '1px solid rgba(0, 0, 0, .0975)',paddingBottom:'20px'}}>
+                        <Row style={{ borderBottom: '1px solid rgba(0, 0, 0, .0975)', paddingBottom: '20px' }}>
                             <Col style={{ textAlign: 'center' }} xs='4'>
-                                <img src={this.state.image} alt="weima-userProfileImage" className='userProfileImage' />
+                                <img src={this.state.image} 
+                                alt="weima-userProfileImage" 
+                                className='userProfileImage' />
                             </Col>
                             <Col xs='8'>
                                 <div className="profilerow1" style={{ color: 'hsl(0, 0%, 15%)' }}>
-                                    <h1 style={{ fontSize: '28px', fontWeight: '300', lineHeight: '32px' }}>{this.state.email}
-                                        <Button style={{
-                                            marginLeft: '20px',
-                                            marginRight: '20px',
-                                            backgroundColor: '#fafafa',
-                                            color: 'hsl(0, 0%, 15%)',
-                                            borderColor: 'rgba(0, 0, 0, .0975)',
-                                            fontSize: '14px',
-                                            fontWeight: '600',
-                                            lineHeight: '18px'
-                                        }}>Chỉnh sửa trang cá nhân</Button>
+                                    <h1 style={{ fontSize: '28px', fontWeight: '300', lineHeight: '32px' }}>{this.state.username}
+                                        <a href="http://localhost:3000/editprofile">
+                                            <Button style={{
+                                                marginLeft: '20px',
+                                                marginRight: '20px',
+                                                backgroundColor: '#fafafa',
+                                                color: 'hsl(0, 0%, 15%)',
+                                                borderColor: 'rgba(0, 0, 0, .0975)',
+                                                fontSize: '14px',
+                                                fontWeight: '600',
+                                                lineHeight: '18px'
+                                            }}>Chỉnh sửa trang cá nhân</Button>
+                                        </a>
                                         <img src={SettingLogo}
                                             alt="weima-settinglogo"
                                             className='settinglogo'
@@ -126,13 +130,19 @@ class UserProfile extends React.Component {
                                         </span>
                                     </span>
                                 </div>
-                                <div className="profilerow3">
+                                <div className="profilerow4">
                                     <span>Zalo:
                                         <span style={{ fontWeight: '600' }}> <a href='https://chat.zalo.me/' className="facebooklink">{this.state.zaloid}</a>
                                         </span>
                                     </span>
                                 </div>
-                                <div className="profilerow3">
+                                <div className="profilerow5">
+                                    <span>Địa chỉ:
+                                        <span style={{ fontWeight: '600' }}> {this.state.address}
+                                        </span>
+                                    </span>
+                                </div>
+                                <div className="profilerow6">
                                     <span>Số điện thoại:
                                         <span style={{ fontWeight: '600' }}> {this.state.phone}
                                         </span>

@@ -142,7 +142,7 @@ class CreatePost extends React.Component {
                         </div>
                     </div> */}
                 <div style={{ height: 18 }}></div>
-                <div className='container' style={{ width: "900px" }}>
+                <div className='container' style={{ width: "900px" , backgroundColor:'white'}}>
                     <div style={{ height: 18 }}></div>
                     <h1 className='mt-3 mb-2 fong' >Create post</h1>
                     <div className=' d-flex justify-content-between'>
