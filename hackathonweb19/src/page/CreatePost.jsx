@@ -4,7 +4,9 @@ import { Input, Button, Form } from 'reactstrap';
 import axios from 'axios';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
-import NavBar from '../components/NavBar/NavBar2'
+import NavBar from '../components/NavBar/NavBar2';
+import FileBase64 from 'react-file-base64';
+
 class CreatePost extends React.Component {
     state = {
         name: '',
@@ -12,7 +14,9 @@ class CreatePost extends React.Component {
         discount: '',
         info: '',
         catalog: '',
-        image: '',
+        // image: '', thay bang files
+        files: '',
+        divVisiable: false
     };
     handleInputChangeName = (value) => {
         this.setState({
@@ -50,6 +54,10 @@ class CreatePost extends React.Component {
         })
         console.log(this.state)
     }
+    getFiles(files) {
+        console.log(files);
+        this.setState({ files: files[0].base64, divVisiable: true });
+    }
     handleSubmit = async (e) => {
         e.preventDefault();
         console.log(this.state);
@@ -78,7 +86,7 @@ class CreatePost extends React.Component {
                                 method: 'post',
                                 data: {
                                     name: this.state.name, price: this.state.price, user_Id: data[i]._id,
-                                    catalog_Id: this.state.catalog, info: this.state.info, image_link: this.state.image, discount: this.state.discount
+                                    catalog_Id: this.state.catalog, info: this.state.info, image_link: this.state.files, discount: this.state.discount
                                 },
                             })
                                 .then((response) => {
@@ -102,47 +110,8 @@ class CreatePost extends React.Component {
                         <NavBar />
                     </div>
                 </div>
-
-                {/* <div>
-                        <h2 className='mt-3 mb-2'>Create post</h2>
-                    </div>
-                    <div>
-                        <div>
-                            <Form>
-                                <div className="form-group">
-                                   <label>Tên sản phẩm</label>
-                                   <input type="product" className="form-control" id="product"  placeholder="Tên sản phẩm"/>
-                                </div>
-                                <div className="form-group">
-                                    <label>Giá sản phẩm</label>
-                                    <input type="price" className="form-control" id="price"  placeholder="VND"/>
-                                </div>
-                                <div className="form-group">
-                                    <label>Chiết khấu</label>
-                                    <input type="discount" className="form-control" id="discount"  placeholder="Chiết khấu"/>
-                                </div>
-                                <div className="form-group">
-                                    <label>Danh mục</label>
-                                    <select className="form-control" id="exampleFormControlSelect1">
-                                        <option>Loại sản phẩm</option>
-                                        <option>Điện tử</option>
-                                        <option>Thời trang</option>
-                                        <option>Nông Sản</option>
-                                        <option>Thực phẩm</option>
-                                        <option>Hàng Hóa</option>
-                                    </select>
-                                </div>
-                                <div className="form-group">
-                                    <label>Ảnh sản phẩm</label>
-                                    <input type="file" className="form-control" id="images" name="images[]" style={{height: '45px'}} multiple/>
-                                </div>
-                                <div className="row" id="image_preview"></div>
-                                <button type="submit" className="btn btn-danger">Submit</button>
-                             </Form>
-                        </div>
-                    </div> */}
                 <div style={{ height: 18 }}></div>
-                <div className='container' style={{ width: "900px" , backgroundColor:'white'}}>
+                <div className='container' style={{ width: "900px", backgroundColor: 'white' }}>
                     <div style={{ height: 18 }}></div>
                     <h1 className='mt-3 mb-2 fong' >Create Post</h1> {/*Không được sửa do lỗi font khi viết tiếng việt*/}
                     <div className=' d-flex justify-content-between'>
@@ -178,9 +147,20 @@ class CreatePost extends React.Component {
                                     </div>
                                     <div className="form-group">
                                         {/* <label>Ảnh sản phẩm</label> */}
-                                        <Input type="file" className="image" id="images" name="images[]" onChange={(e) => { this.handleInputChangeImage(e.target.value) }} style={{ height: '45px', backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)', paddingTop: "6px", paddingLeft: "6px" }} multiple />
+                                        {/* <Input type="file" className="image" id="images" name="images[]" onChange={(e) => { this.handleInputChangeImage(e.target.value) }} style={{ height: '45px', backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)', paddingTop: "6px", paddingLeft: "6px" }} multiple /> */}
+                                        <FileBase64
+                                            multiple={true}
+                                            onDone={this.getFiles.bind(this)}
+                                        />
                                     </div>
-                                    <div className="row" id="image_preview"></div>
+                                    <div className="row" id="image_preview">
+                                        {this.state.divVisiable ?
+                                            (
+                                                <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px', height: '200px' }}>
+                                                    <img src={this.state.files} alt="anh_san_pham" with="200px" height="200px" />
+                                                </div>
+                                            ) : null
+                                        }</div>
                                     <Button type="submit" className="btn btn-danger">Đăng sản phẩm</Button>
                                 </Form>
                             </div>
@@ -194,3 +174,4 @@ class CreatePost extends React.Component {
 }
 
 export default withRouter(CreatePost);
+
