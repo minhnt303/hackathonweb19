@@ -11,7 +11,9 @@ const NavBar = (props) => {
             <tbody>
                 <tr className="NavBar2">
                     <td className="logotd">
-                        <span className="logoName"><img src={logo} alt="weima-logo" className='classLogo' />Weima</span>
+                        <a href='http://localhost:3000' className='homepagelink'>
+                            <span className="logoName"><img src={logo} alt="weima-logo" className='classLogo' />Weima</span>
+                        </a>
                     </td>
                     <td style={{ textAlign: 'center' }}>
                         <div className="Search">
@@ -23,7 +25,7 @@ const NavBar = (props) => {
 
                     <td style={{ textAlign: 'right', paddingBottom: '10px' }}>
                         <a href="http://localhost:3000/createpost"><img src={portlogo} alt="weima-userlogo" className='classuserLogo' /></a>
-                        <a href="http://localhost:3000/profile"><img src={userlogo} alt="weima-userlogo" className='classuserLogo' style={{marginLeft: "20px"}}/></a>
+                        <a href="http://localhost:3000/profile"><img src={userlogo} alt="weima-userlogo" className='classuserLogo' style={{ marginLeft: "20px" }} /></a>
                     </td>
                 </tr>
             </tbody>

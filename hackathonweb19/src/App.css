@@ -1,3 +1,13 @@
+.homepagelink{
+    color: hsl(210, 100%, 21%);
+    text-decoration: none;
+}
+
+.homepagelink:hover{
+    color: hsl(210, 100%, 21%);
+    text-decoration: none;
+}
+
 .Login {
     background-color: #fafafa;
     width: 100%;
