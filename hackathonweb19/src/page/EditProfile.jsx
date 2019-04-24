@@ -106,7 +106,7 @@ class EditProfile extends React.Component {
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].email === localStorage.getItem('user')) {
                             axios({
-                                url: `${config.baseUrl}/updateprofile/${data[i]._id}/${this.state.username}&${this.state.facebookid}&${this.state.zaloid}&${this.state.phone}&${this.state.address}`,
+                                url: `${config.baseUrl}/updateprofile/${data[i]._id}/${this.state.username}&${this.state.facebookid}&${this.state.zaloid}&${this.state.phone}&${this.state.address}&${this.state.files}`,
                                 method: 'get'
                             })
                                 .then((response) => {

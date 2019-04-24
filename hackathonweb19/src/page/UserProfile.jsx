@@ -22,8 +22,8 @@ class UserProfile extends React.Component {
         image: '',
         post: '',
         facebooklink: '',
-        productimage:[],
-        productid:[],
+        productimage: [],
+        productid: [],
     }
 
     componentDidMount() {
@@ -32,7 +32,7 @@ class UserProfile extends React.Component {
                 let data = response.data;
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].email === localStorage.getItem('user')) {
-                        console.log(data[i]);
+                        // console.log(data[i]);
                         this.setState({
                             email: data[i].email,
                             username: data[i].username,
@@ -47,29 +47,32 @@ class UserProfile extends React.Component {
                             .then(productdata => {
                                 let product = productdata.data;
                                 let count = 0;
-                                console.log(product)
+                                // console.log(product)
                                 for (let j = 0; j < product.length; j++) {
                                     // console.log(data[i]._id, product[j].user_Id)
                                     if (data[i]._id === product[j].user_Id) {
                                         count = count + 1;
                                         this.setState({
-                                            productimage:[...this.state.productimage,product[j].image_link],
-                                            productid:[...this.state.productid,product[j]._id]
+                                            productimage: [...this.state.productimage, product[j].image_link],
+                                            productid: [...this.state.productid, product[j]._id]
                                         })
                                     }
                                 }
                                 this.setState({
                                     post: count,
                                 })
-                                console.log(count)
-                                console.log(this.state)
+                                // console.log(this.state)
                             })
                             .catch(error => console.log(error));
-                        console.log(this.state)
+                        // console.log(this.state)
                     }
                 }
             })
             .catch(error => console.log(error));
+    }
+
+    clickimage(item){
+        console.log(item);
     }
 
     render() {
@@ -212,11 +215,18 @@ class UserProfile extends React.Component {
                                     textTransform: 'uppercase',
                                     paddingTop: '12px'
                                 }} className='profilelink'>
-                                <img src={LikeLogo}
+                                    <img src={LikeLogo}
                                         alt='gridlogo'
                                         style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Đã thích
                                 </a>
                             </Col>
+                        </Row>
+                        <Row style={{ marginLeft: '10%', marginRight: '10%' }}>
+                            {this.state.productimage.map((item, index)=>(
+                                <a onClick={ () => this.clickimage(item)} key={index}>
+                                    <img  src={item}  alt='imagase' style={{width:'25%', height:'25%', border: '1px solid rgba(0, 0, 0, .0975)'}}/>
+                                </a>
+                            ))}
                         </Row>
                         {/* </Container> */}
                     </div>
