@@ -316,7 +316,7 @@ class EditProfile extends React.Component {
                                         <Col xs='3'
                                             style={{
                                                 textAlign: 'right',
-                                                marginTop: '3.5px'
+                                                marginTop: '0px'
                                             }}>
                                             <Label
                                                 style={{
@@ -326,7 +326,10 @@ class EditProfile extends React.Component {
                                                 }}
                                             >Thay đổi ảnh đại diện</Label>
                                         </Col>
-                                        <Col xs='9'>
+                                        <Col xs='9'
+                                        style={{
+                                                marginTop: '7px'
+                                            }}>
                                             <FileBase64
                                                 multiple={true}
                                                 onDone={this.getFiles.bind(this)}
