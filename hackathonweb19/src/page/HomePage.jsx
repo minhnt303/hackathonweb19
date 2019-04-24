@@ -22,6 +22,7 @@ class CreatePost extends React.Component {
                 </div>
                 <Container>
                     
+            <div>jhdudfsdifjidjfi</div>
                 </Container>
             </div>
         )
