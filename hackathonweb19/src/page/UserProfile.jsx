@@ -7,6 +7,9 @@ import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar2'
 import SettingLogo from '../settinglogo.png'
+import GridLogo from '../gridlogo.png'
+import BookmarkLogo from '../bookmarklogo.png'
+import LikeLogo from '../likelogo.png'
 class UserProfile extends React.Component {
 
     state = {
@@ -77,9 +80,9 @@ class UserProfile extends React.Component {
                         {/* <Container> */}
                         <Row style={{ borderBottom: '1px solid rgba(0, 0, 0, .0975)', paddingBottom: '20px' }}>
                             <Col style={{ textAlign: 'center' }} xs='4'>
-                                <img src={this.state.image} 
-                                alt="weima-userProfileImage" 
-                                className='userProfileImage' />
+                                <img src={this.state.image}
+                                    alt="weima-userProfileImage"
+                                    className='userProfileImage' />
                             </Col>
                             <Col xs='8'>
                                 <div className="profilerow1" style={{ color: 'hsl(0, 0%, 15%)' }}>
@@ -148,6 +151,66 @@ class UserProfile extends React.Component {
                                         </span>
                                     </span>
                                 </div>
+                            </Col>
+                        </Row>
+                        <Row style={{ marginLeft: '20%', marginRight: '20%' }}>
+                            <Col xs='4' style={{
+                                textAlign: 'center',
+                                padding: '0px',
+                                marginTop: '9px',
+                                marginBottom: '9px'
+                            }}>
+                                <a href='http://localhost:3000/profile' style={{
+                                    borderTop: '1px solid black',
+                                    color: 'hsl(0, 0%, 15%)',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    lineHeight: '18px',
+                                    textTransform: 'uppercase',
+                                    paddingTop: '12px'
+                                }} className='profilelink'>
+                                    <img src={GridLogo}
+                                        alt='gridlogo'
+                                        style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Bài viết
+                                </a>
+                            </Col>
+                            <Col xs='4' style={{
+                                textAlign: 'center',
+                                padding: '0px',
+                                marginTop: '9px',
+                                marginBottom: '9px'
+                            }}>
+                                <a href='http://localhost:3000' style={{
+                                    color: 'hsl(0, 0%, 60%)',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    lineHeight: '18px',
+                                    textTransform: 'uppercase',
+                                    paddingTop: '12px'
+                                }}>
+                                    <img src={BookmarkLogo}
+                                        alt='gridlogo'
+                                        style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Đã lưu
+                                </a>
+                            </Col>
+                            <Col xs='4' style={{
+                                textAlign: 'center',
+                                padding: '0px',
+                                marginTop: '9px',
+                                marginBottom: '9px'
+                            }}>
+                                <a href='http://localhost:3000' style={{
+                                    color: 'hsl(0, 0%, 60%)',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    lineHeight: '18px',
+                                    textTransform: 'uppercase',
+                                    paddingTop: '12px'
+                                }}>
+                                <img src={LikeLogo}
+                                        alt='gridlogo'
+                                        style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Đã thích
+                                </a>
                             </Col>
                         </Row>
                         {/* </Container> */}
