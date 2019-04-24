@@ -20,8 +20,9 @@ class CreatePost extends React.Component {
                         <NavBar />
                     </div>
                 </div>
+                <p>duusus</p>
                 <Container>
-                    
+                
                 </Container>
             </div>
         )
