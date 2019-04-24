@@ -268,7 +268,7 @@ li a:hover {
 .container {
     border: 1px solid rgba(0, 0, 0, .0975);
     width: 900px;
-    height: 85%;
+    height: 100%;
 }
 
 .profileMain {
@@ -326,4 +326,7 @@ li a:hover {
     margin-top:5%;
     margin-left:20%;
     margin-right:20%;
+}
+.profilelink:hover{
+    text-decoration: none;
 }

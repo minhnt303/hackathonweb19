@@ -6,7 +6,7 @@ import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar2';
 import FileBase64 from 'react-file-base64';
-
+// import Popup from "reactjs-popup";
 class CreatePost extends React.Component {
     state = {
         name: '',
@@ -73,6 +73,7 @@ class CreatePost extends React.Component {
                 //     })
                 //     .catch(error => console.log(error));
                 console.log(localStorage.getItem('user'))
+
                 if (this.state.name === '' || this.state.price === '' || this.state.info === '' ||
                     this.state.image === '' || this.state.discount === '' || this.state.catalog === '') {
                     console.log('Post false')
@@ -110,6 +111,9 @@ class CreatePost extends React.Component {
                         <NavBar />
                     </div>
                 </div>
+                {/* <Popup trigger={<button> Trigger</button>} position="right center">
+                    <div>Popup content here !!<Button>jas</Button></div>
+                </Popup> */}
                 <div style={{ height: 18 }}></div>
                 <div className='container' style={{ width: "900px", backgroundColor: 'white' }}>
                     <div style={{ height: 18 }}></div>
@@ -153,14 +157,13 @@ class CreatePost extends React.Component {
                                             onDone={this.getFiles.bind(this)}
                                         />
                                     </div>
-                                    <div className="row" id="image_preview">
-                                        {this.state.divVisiable ?
-                                            (
-                                                <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px', height: '200px' }}>
-                                                    <img src={this.state.files} alt="anh_san_pham" with="200px" height="200px" />
-                                                </div>
-                                            ) : null
-                                        }</div>
+                                    {this.state.divVisiable ?
+                                        (
+                                            <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px', height: '30px' }}>
+                                                <img src={this.state.files} alt="anh_san_pham" with="200px" height="30px" />
+                                            </div>
+                                        ) : null
+                                    }
                                     <Button type="submit" className="btn btn-danger">Đăng sản phẩm</Button>
                                 </Form>
                             </div>

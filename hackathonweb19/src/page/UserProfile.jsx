@@ -7,6 +7,9 @@ import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar2'
 import SettingLogo from '../settinglogo.png'
+import GridLogo from '../gridlogo.png'
+import BookmarkLogo from '../bookmarklogo.png'
+import LikeLogo from '../likelogo.png'
 class UserProfile extends React.Component {
 
     state = {
@@ -19,6 +22,8 @@ class UserProfile extends React.Component {
         image: '',
         post: '',
         facebooklink: '',
+        productimage: [],
+        productid: [],
     }
 
     componentDidMount() {
@@ -27,7 +32,7 @@ class UserProfile extends React.Component {
                 let data = response.data;
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].email === localStorage.getItem('user')) {
-                        console.log(data[i]);
+                        // console.log(data[i]);
                         this.setState({
                             email: data[i].email,
                             username: data[i].username,
@@ -42,26 +47,32 @@ class UserProfile extends React.Component {
                             .then(productdata => {
                                 let product = productdata.data;
                                 let count = 0;
-                                console.log(product)
+                                // console.log(product)
                                 for (let j = 0; j < product.length; j++) {
                                     // console.log(data[i]._id, product[j].user_Id)
                                     if (data[i]._id === product[j].user_Id) {
-                                        console.log('hasd')
                                         count = count + 1;
+                                        this.setState({
+                                            productimage: [...this.state.productimage, product[j].image_link],
+                                            productid: [...this.state.productid, product[j]._id]
+                                        })
                                     }
                                 }
                                 this.setState({
                                     post: count,
                                 })
-                                console.log(count)
-                                console.log(this.state)
+                                // console.log(this.state)
                             })
                             .catch(error => console.log(error));
-                        console.log(this.state)
+                        // console.log(this.state)
                     }
                 }
             })
             .catch(error => console.log(error));
+    }
+
+    clickimage(item){
+        console.log(item);
     }
 
     render() {
@@ -77,9 +88,9 @@ class UserProfile extends React.Component {
                         {/* <Container> */}
                         <Row style={{ borderBottom: '1px solid rgba(0, 0, 0, .0975)', paddingBottom: '20px' }}>
                             <Col style={{ textAlign: 'center' }} xs='4'>
-                                <img src={this.state.image} 
-                                alt="weima-userProfileImage" 
-                                className='userProfileImage' />
+                                <img src={this.state.image}
+                                    alt="weima-userProfileImage"
+                                    className='userProfileImage' />
                             </Col>
                             <Col xs='8'>
                                 <div className="profilerow1" style={{ color: 'hsl(0, 0%, 15%)' }}>
@@ -149,6 +160,73 @@ class UserProfile extends React.Component {
                                     </span>
                                 </div>
                             </Col>
+                        </Row>
+                        <Row style={{ marginLeft: '20%', marginRight: '20%' }}>
+                            <Col xs='4' style={{
+                                textAlign: 'center',
+                                padding: '0px',
+                                marginTop: '9px',
+                                marginBottom: '9px'
+                            }}>
+                                <a href='http://localhost:3000/profile' style={{
+                                    borderTop: '1px solid black',
+                                    color: 'hsl(0, 0%, 15%)',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    lineHeight: '18px',
+                                    textTransform: 'uppercase',
+                                    paddingTop: '12px'
+                                }} className='profilelink'>
+                                    <img src={GridLogo}
+                                        alt='gridlogo'
+                                        style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Bài viết
+                                </a>
+                            </Col>
+                            <Col xs='4' style={{
+                                textAlign: 'center',
+                                padding: '0px',
+                                marginTop: '9px',
+                                marginBottom: '9px'
+                            }}>
+                                <a href='http://localhost:3000' style={{
+                                    color: 'hsl(0, 0%, 60%)',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    lineHeight: '18px',
+                                    textTransform: 'uppercase',
+                                    paddingTop: '12px'
+                                }} className='profilelink'>
+                                    <img src={BookmarkLogo}
+                                        alt='gridlogo'
+                                        style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Đã lưu
+                                </a>
+                            </Col>
+                            <Col xs='4' style={{
+                                textAlign: 'center',
+                                padding: '0px',
+                                marginTop: '9px',
+                                marginBottom: '9px'
+                            }}>
+                                <a href='http://localhost:3000' style={{
+                                    color: 'hsl(0, 0%, 60%)',
+                                    fontSize: '14px',
+                                    fontWeight: '600',
+                                    lineHeight: '18px',
+                                    textTransform: 'uppercase',
+                                    paddingTop: '12px'
+                                }} className='profilelink'>
+                                    <img src={LikeLogo}
+                                        alt='gridlogo'
+                                        style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Đã thích
+                                </a>
+                            </Col>
+                        </Row>
+                        <Row style={{ marginLeft: '10%', marginRight: '10%' }}>
+                            {this.state.productimage.map((item, index)=>(
+                                <a onClick={ () => this.clickimage(item)} key={index}>
+                                    <img  src={item}  alt='imagase' style={{width:'25%', height:'25%', border: '1px solid rgba(0, 0, 0, .0975)'}}/>
+                                </a>
+                            ))}
                         </Row>
                         {/* </Container> */}
                     </div>

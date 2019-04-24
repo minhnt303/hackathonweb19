@@ -6,6 +6,8 @@ import axios from 'axios';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar'
+import FileBase64 from 'react-file-base64';
+
 class Register extends React.Component {
     state = {
         email: '',
@@ -15,6 +17,8 @@ class Register extends React.Component {
         phone: '',
         address: '',
         password: '',
+        files: '',
+        divVisiable: false
     };
 
     handleInputChangeEmail = (value) => {
@@ -66,6 +70,11 @@ class Register extends React.Component {
         console.log(this.state)
     }
 
+    getFiles(files) {
+        console.log(files);
+        this.setState({ files: files[0].base64, divVisiable: true });
+    }
+
     handleSubmit = async (e) => {
         e.preventDefault();
         console.log(this.state);
@@ -83,7 +92,7 @@ class Register extends React.Component {
                         valid = false;
                         break;
                     } else if (this.state.email === '' || this.state.password === '' || this.state.username === '' || this.state.zaloid === '' ||
-                        this.state.facebookid === '' || this.state.phone === '' || this.state.address === '') {
+                        this.state.facebookid === '' || this.state.phone === '' || this.state.address === '' || this.state.files === '') {
                         console.log('Please input all feid');
                         valid = false;
                         break;
@@ -100,7 +109,8 @@ class Register extends React.Component {
                         method: 'post',
                         data: {
                             email: this.state.email, password: this.state.password, username: this.state.username,
-                            zaloId: this.state.zaloid, phone: this.state.phone, fbId: this.state.facebookid, address: this.state.address
+                            zaloId: this.state.zaloid, phone: this.state.phone, fbId: this.state.facebookid, 
+                            address: this.state.address, avatarUrl: this.state.files,
                         },
                     })
                         .then((response) => {
@@ -161,6 +171,18 @@ class Register extends React.Component {
                                 type='text'
                                 placeholder='Mật khẩu'
                                 onChange={(e) => { this.handleInputChangePassword(e.target.value) }} style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                            <div style={{ height: 18 }}></div>
+                            <FileBase64
+                                multiple={true}
+                                onDone={this.getFiles.bind(this)}
+                            />
+                            {this.state.divVisiable ?
+                                (
+                                    <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px' }}>
+                                        <img src={this.state.files} alt="anh_san_pham" with="20px" height="30px" />
+                                    </div>
+                                ) : null
+                            }
                             <div style={{ height: 18 }}></div>
                             <Button className="registerButton" style={{ backgroundColor: 'hsl(209, 86%, 58%)', border: 'hsl(209, 86%, 58%)', fontWeight: 'bold' }}>Đăng ký</Button>
                         </Form>
