@@ -5,7 +5,8 @@ import axios from 'axios';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar2';
-
+// import Popup from "reactjs-popup";
+import FileBase64 from 'react-file-base64';
 class EditProfile extends React.Component {
 
     state = {
@@ -15,7 +16,9 @@ class EditProfile extends React.Component {
         zaloid: '',
         phone: '',
         address: '',
-        image: ''
+        image: '',
+        files: '',
+        divVisiable: false
     }
 
     componentDidMount() {
@@ -32,7 +35,8 @@ class EditProfile extends React.Component {
                             zaloid: data[i].zaloId,
                             phone: data[i].phone,
                             address: data[i].address,
-                            image: data[i].avatarUrl
+                            image: data[i].avatarUrl,
+                            fires: data[i].avatarUrl
                         })
                         console.log(this.state)
                     }
@@ -74,7 +78,10 @@ class EditProfile extends React.Component {
         })
         console.log(this.state)
     }
-
+    getFiles(files) {
+        console.log(files);
+        this.setState({ files: files[0].base64, divVisiable: true });
+    }
     handleSubmit = async (e) => {
         e.preventDefault();
         console.log(this.state);
@@ -86,7 +93,7 @@ class EditProfile extends React.Component {
                 let valid = true;
                 console.log(data);
                 if (this.state.password === '' || this.state.username === '' || this.state.zaloid === '' ||
-                    this.state.facebookid === '' || this.state.address === '') {
+                    this.state.facebookid === '' || this.state.address === ''|| this.state.fires === '') {
                     console.log('Please input all feild');
                     valid = false;
                 }
@@ -104,6 +111,7 @@ class EditProfile extends React.Component {
                             })
                                 .then((response) => {
                                     console.log(response.data);
+                                    
                                     window.location.href = 'http://localhost:3000/profile'
                                 })
                                 .catch((error) => {
@@ -139,10 +147,9 @@ class EditProfile extends React.Component {
                                         }}>
                                         Chỉnh sửa trang cá nhân
                                 </div>
-
                                     <a href='http://localhost:3000/password/change'
-                                    style={{color:'hsl(0, 0%, 15%)'}}
-                                    className ='row2link'>
+                                        style={{ color: 'hsl(0, 0%, 15%)' }}
+                                        className='row2link'>
                                         <div className="row2"
                                             style={{
                                                 textAlign: 'left',
@@ -163,12 +170,12 @@ class EditProfile extends React.Component {
                                         </Col>
                                         <Col xs='9'>
                                             <div className="editName" style={{
-                                                fontSize: '20px',
-                                                lineHeight: '22px',
+                                                fontSize: '24px',
+                                                lineHeight: '38px',
                                                 margin: '0px 0px 2px'
                                             }}>
                                                 {this.state.username}</div>
-                                            <a href='http:/localhost:3000/'
+                                            {/* <a href='http:/localhost:3000/'
                                                 style={{
                                                     color: 'hsl(209, 86%, 58%)',
                                                     fontWeight: '600',
@@ -176,7 +183,33 @@ class EditProfile extends React.Component {
                                                     lineHeight: '18px',
                                                     margin: '0px 0px 2px'
                                                 }}>
-                                                Thay đổi ảnh đại diện</a>
+                                                Thay đổi ảnh đại diện</a> */}
+                                            {/* <Popup trigger={<Button
+                                                style={{
+                                                    backgroundColor: 'white',
+                                                    color: 'hsl(209, 86%, 58%)',
+                                                    padding: '0px',
+                                                    border: '0px',
+                                                    fontWeight: '600',
+                                                    fontSize: '14px',
+                                                    lineHeight: '18px',
+                                                    margin: '0px 0px 2px'
+                                                }}
+                                            >Thay đổi ảnh đại diện</Button>} position="right center">
+                                                <div><FileBase64
+                                                        multiple={true}
+                                                        onDone={this.getFiles.bind(this)}
+                                                    />
+                                                        {this.state.divVisiable ?
+                                                            (
+                                                                <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px', height: '200px' }}>
+                                                                    <img src={this.state.files} alt="anh_san_pham" with="200px" height="200px" />
+                                                                </div>
+                                                            ) : null
+                                                        }
+                                                        <Button>Đăng ảnh</Button>
+                                                </div>
+                                            </Popup> */}
                                         </Col>
                                     </Row>
                                     <Row style={{ marginBottom: '15px' }}>
@@ -277,6 +310,34 @@ class EditProfile extends React.Component {
                                             <Input type='textarea'
                                                 style={{ width: '90%', height: '64px', color: 'hsl(0, 0%, 15%)' }}
                                                 onChange={(e) => { this.handleInputChangeAddress(e.target.value) }}></Input>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginBottom: '15px' }}>
+                                        <Col xs='3'
+                                            style={{
+                                                textAlign: 'right',
+                                                marginTop: '3.5px'
+                                            }}>
+                                            <Label
+                                                style={{
+                                                    display: 'inline',
+                                                    fontWeight: '600',
+                                                    lineHeight: '18px'
+                                                }}
+                                            >Thay đổi ảnh đại diện</Label>
+                                        </Col>
+                                        <Col xs='9'>
+                                            <FileBase64
+                                                multiple={true}
+                                                onDone={this.getFiles.bind(this)}
+                                            />
+                                            {this.state.divVisiable ?
+                                                (
+                                                    <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px' }}>
+                                                        <img src={this.state.files} alt="anh_san_pham" with="20px" height="30px" />
+                                                    </div>
+                                                ) : null
+                                            }
                                         </Col>
                                     </Row>
                                     <Row style={{ marginBottom: '15px' }}>

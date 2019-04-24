@@ -95,6 +95,19 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         }
     })
 
+    app.get("/updateavatarurl/:userId/:image", async (req, res) => {
+        const { userId, image } = req.params;
+        console.log(userId, image);
+        const existedUser = await userModel.findById(userId).exec();
+        if (!existedUser) {
+            console.log(1)
+            res.status(404).end('User not found');
+        } else {
+            await userModel.findByIdAndUpdate(userId, { $set: { avatarUrl: image } }).exec();
+            res.status(200).end('Update success')
+        }
+    })
+
     app.listen(3001, (err) => {
         if (err) throw err;
         console.log('Server is listen on post 3001..')
