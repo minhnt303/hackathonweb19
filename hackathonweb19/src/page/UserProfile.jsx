@@ -19,7 +19,7 @@ class UserProfile extends React.Component {
         zaloid: '',
         phone: '',
         address: '',
-        image: '',
+        files: '',
         post: '',
         facebooklink: '',
         productimage: [],
@@ -40,8 +40,13 @@ class UserProfile extends React.Component {
                             zaloid: data[i].zaloId,
                             phone: data[i].phone,
                             address: data[i].address,
-                            image: data[i].avatarUrl,
+                            files: data[i].avatarUrl,
                             facebooklink: 'https://www.messenger.com/t/' + data[i].fbId,
+                        })
+                        let path = config.baseUrl+'/'+this.state.files;
+                        console.log(path)
+                        this.setState({
+                            files: path
                         })
                         axios.get(`${config.baseUrl}/api/product`)
                             .then(productdata => {
@@ -64,7 +69,7 @@ class UserProfile extends React.Component {
                                 // console.log(this.state)
                             })
                             .catch(error => console.log(error));
-                        // console.log(this.state)
+                        console.log(this.state)
                     }
                 }
             })
@@ -88,7 +93,7 @@ class UserProfile extends React.Component {
                         {/* <Container> */}
                         <Row style={{ borderBottom: '1px solid rgba(0, 0, 0, .0975)', paddingBottom: '20px' }}>
                             <Col style={{ textAlign: 'center' }} xs='4'>
-                                <img src={this.state.image}
+                                <img src={this.state.files}
                                     alt="weima-userProfileImage"
                                     className='userProfileImage' />
                             </Col>
@@ -223,7 +228,7 @@ class UserProfile extends React.Component {
                         </Row>
                         <Row style={{ marginLeft: '10%', marginRight: '10%' }}>
                             {this.state.productimage.map((item, index)=>(
-                                <a onClick={ () => this.clickimage(item)} key={index}>
+                                <a href='http://localhost:3000' onClick={ () => this.clickimage(item)} key={index}>
                                     <img  src={item}  alt='imagase' style={{width:'25%', height:'25%', border: '1px solid rgba(0, 0, 0, .0975)'}}/>
                                 </a>
                             ))}

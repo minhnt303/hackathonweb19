@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css'
-import { Container} from 'reactstrap';
+import { Form, Input } from 'reactstrap';
 // import axios from 'axios';
 // import config from '../config';
 import { withRouter } from 'react-router-dom';
@@ -11,7 +11,7 @@ class CreatePost extends React.Component {
     state = {
 
     };
-    
+
     render() {
         return (
             <div className=''>
@@ -20,10 +20,10 @@ class CreatePost extends React.Component {
                         <NavBar />
                     </div>
                 </div>
-                <Container>
-                    
-            <div>jhdudfsdifjidjfi</div>
-                </Container>
+                <Form action="/upload" encType="multipart/form-data" method="POST">
+                    <Input type="file" name="avatar" />
+                    <Input type="submit" value="Upload a file" />
+                </Form>
             </div>
         )
     }
