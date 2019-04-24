@@ -33,6 +33,7 @@ import Login from './page/Login';
 import Register from './page/Register';
 import UserProfile from './page/UserProfile';
 import CreatePost from './page/CreatePost';
+import HomePage from './page/HomePage.jsx';
 import EditProfile from './page/EditProfile';
 import PasswordChange from './page/PasswordChange'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
@@ -49,6 +50,7 @@ class App extends Component {
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/createpost' component={CreatePost} />
+          <Route path='/home' component={HomePage} />
           <Route path='/profile' component={UserProfile} />
           <Route path='/editprofile' component={EditProfile} />
           <Route path='/password/change' component={PasswordChange} />
