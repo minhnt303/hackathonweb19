@@ -22,6 +22,8 @@ class UserProfile extends React.Component {
         image: '',
         post: '',
         facebooklink: '',
+        productimage:[],
+        productid:[],
     }
 
     componentDidMount() {
@@ -49,8 +51,11 @@ class UserProfile extends React.Component {
                                 for (let j = 0; j < product.length; j++) {
                                     // console.log(data[i]._id, product[j].user_Id)
                                     if (data[i]._id === product[j].user_Id) {
-                                        console.log('hasd')
                                         count = count + 1;
+                                        this.setState({
+                                            productimage:[...this.state.productimage,product[j].image_link],
+                                            productid:[...this.state.productid,product[j]._id]
+                                        })
                                     }
                                 }
                                 this.setState({
@@ -187,7 +192,7 @@ class UserProfile extends React.Component {
                                     lineHeight: '18px',
                                     textTransform: 'uppercase',
                                     paddingTop: '12px'
-                                }}>
+                                }} className='profilelink'>
                                     <img src={BookmarkLogo}
                                         alt='gridlogo'
                                         style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Đã lưu
@@ -206,7 +211,7 @@ class UserProfile extends React.Component {
                                     lineHeight: '18px',
                                     textTransform: 'uppercase',
                                     paddingTop: '12px'
-                                }}>
+                                }} className='profilelink'>
                                 <img src={LikeLogo}
                                         alt='gridlogo'
                                         style={{ height: '17 px', width: '12px', paddingBottom: '5px' }} />  Đã thích
