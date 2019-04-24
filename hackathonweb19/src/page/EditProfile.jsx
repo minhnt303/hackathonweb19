@@ -327,6 +327,7 @@ class EditProfile extends React.Component {
                                             >Thay đổi ảnh đại diện</Label>
                                         </Col>
                                         <Col xs='9'
+                                        
                                         style={{
                                                 marginTop: '7px'
                                             }}>
