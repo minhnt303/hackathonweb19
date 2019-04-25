@@ -10,6 +10,7 @@ import SettingLogo from '../settinglogo.png'
 import GridLogo from '../gridlogo.png'
 import BookmarkLogo from '../bookmarklogo.png'
 import LikeLogo from '../likelogo.png'
+import Popup from "reactjs-popup";
 class UserProfile extends React.Component {
 
     state = {
@@ -43,7 +44,7 @@ class UserProfile extends React.Component {
                             files: data[i].avatarUrl,
                             facebooklink: 'https://www.messenger.com/t/' + data[i].fbId,
                         })
-                        let path = config.baseUrl+'/'+this.state.files;
+                        let path = config.baseUrl + '/' + this.state.files;
                         console.log(path)
                         this.setState({
                             files: path
@@ -76,8 +77,13 @@ class UserProfile extends React.Component {
             .catch(error => console.log(error));
     }
 
-    clickimage(item){
+    clickimage(item) {
         console.log(item);
+    }
+
+    logOut() {
+        localStorage.removeItem('user')
+        console.log('logout')
     }
 
     render() {
@@ -112,10 +118,48 @@ class UserProfile extends React.Component {
                                                 lineHeight: '18px'
                                             }}>Chỉnh sửa trang cá nhân</Button>
                                         </a>
-                                        <img src={SettingLogo}
+                                        <Popup trigger={<Button
+                                            style={{
+                                                backgroundColor: 'white',
+                                                color: 'hsl(0, 0%, 15%)',
+                                                padding: '0px',
+                                                border: '0px',
+                                            }}
+                                        ><img src={SettingLogo}
                                             alt="weima-settinglogo"
                                             className='settinglogo'
-                                            style={{ fontSize: '14px', lineHeight: '18px', height: '25px' }} />
+                                            style={{ fontSize: '14px', lineHeight: '18px', height: '25px' }} /></Button>} position="right center">
+                                            <div>
+                                                <div style={{ textAlign: 'center', paddingBottom: '6px', }}>
+                                                    <a href='http://localhost:3000/password/change' style={{
+                                                        backgroundColor: 'white',
+                                                        color: 'hsl(0, 0%, 15%)',
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        border: '0px',
+                                                        paddingRight:'45px',
+                                                        paddingLeft:'45px',
+                                                        paddingBottom:'12px',
+                                                        paddingTop:'10px',
+                                                        borderBottom:'1px solid whitesmoke'
+                                                    }} className='popupLink'>Đổi mật khẩu</a>
+                                                </div>
+                                                <div style={{ textAlign: 'center', paddingBottom: '6px', }}>
+                                                    <a href='http://localhost:3000/login' onClick={this.logOut} style={{
+                                                        backgroundColor: 'white',
+                                                        color: 'hsl(0, 0%, 15%)',
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        border: '0px',
+                                                        paddingRight:'56px',
+                                                        paddingLeft:'56px',
+                                                        paddingBottom:'12px',
+                                                        paddingTop:'8px',
+                                                    }}className='popupLink'>Đăng xuất</a>
+                                                </div>
+                                            </div>
+                                        </Popup>
+
                                     </h1>
                                 </div>
                                 <div className="profilerow2" style={{ color: 'hsl(0, 0%, 15%)' }}>
@@ -227,9 +271,9 @@ class UserProfile extends React.Component {
                             </Col>
                         </Row>
                         <Row style={{ marginLeft: '10%', marginRight: '10%' }}>
-                            {this.state.productimage.map((item, index)=>(
-                                <a href='http://localhost:3000' onClick={ () => this.clickimage(item)} key={index}>
-                                    <img  src={item}  alt='imagase' style={{width:'25%', height:'25%', border: '1px solid rgba(0, 0, 0, .0975)'}}/>
+                            {this.state.productimage.map((item, index) => (
+                                <a href='http://localhost:3000' onClick={() => this.clickimage(item)} key={index}>
+                                    <img src={item} alt='imagase' style={{ width: '25%', height: '25%', border: '1px solid rgba(0, 0, 0, .0975)' }} />
                                 </a>
                             ))}
                         </Row>

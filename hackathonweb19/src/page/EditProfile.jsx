@@ -113,6 +113,7 @@ class EditProfile extends React.Component {
             this.setState({
                 files: path
             })
+            console.log(this.state)
         })
         axios.get(`${config.baseUrl}/deleteimage/${this.state.oldimage}`).then(response => { console.log(response) }).catch((error) => {
             console.log(error);
@@ -141,7 +142,7 @@ class EditProfile extends React.Component {
                             })
                                 .then((response) => {
                                     console.log(response.data);
-                                    
+                                    console.log(this.state)
                                     window.location.href = 'http://localhost:3000/profile'
                                 })
                                 .catch((error) => {

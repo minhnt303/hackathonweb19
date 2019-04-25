@@ -330,3 +330,10 @@ li a:hover {
 .profilelink:hover{
     text-decoration: none;
 }
+.popup-content {
+    border-radius: 8px;
+}
+
+.popupLink:hover{
+    text-decoration: none;
+}
