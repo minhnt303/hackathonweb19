@@ -25,6 +25,11 @@ class UserProfile extends React.Component {
         facebooklink: '',
         productimage: [],
         productid: [],
+        product: [{ id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] }],
+        showPopup: false,
+        // popupProduct: { id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] },
+        // test: false,
+        popupProduct:''
     }
 
     componentDidMount() {
@@ -60,14 +65,27 @@ class UserProfile extends React.Component {
                                         count = count + 1;
                                         this.setState({
                                             productimage: [...this.state.productimage, product[j].image_link],
-                                            productid: [...this.state.productid, product[j]._id]
+                                            productid: [...this.state.productid, product[j]._id],
+                                            // product:[{id:[product[0]._id],image:[product[0].image_link]}]
+                                            product: [...this.state.product, {
+                                                id: [product[j]._id],
+                                                name: [product[j].name],
+                                                image: [product[j].image_link],
+                                                catalog: [product[j].catalog_Id],
+                                                price: [product[j].price],
+                                                discount: [product[j].discount],
+                                                info: [product[j].info],
+                                                like: [product[j].like],
+                                            }]
                                         })
                                     }
                                 }
+                                this.state.product.shift();
+                                console.log(this.state.product)
                                 this.setState({
+                                    product: this.state.product,
                                     post: count,
                                 })
-                                // console.log(this.state)
                             })
                             .catch(error => console.log(error));
                         console.log(this.state)
@@ -78,9 +96,41 @@ class UserProfile extends React.Component {
     }
 
     clickimage(item) {
-        console.log(item);
+        console.log(JSON.stringify(item.id).slice(2, JSON.stringify(item.id).search('"]')));
+        this.setState({
+            showPopup: true,
+            popupProduct: item,
+        });
+        axios.get(`${config.baseUrl}/api/product`)
+            .then(productdata => {
+                let product = productdata.data;
+                for (let j = 0; j < product.length; j++) {
+                    if (product[j]._id === JSON.stringify(item.id).slice(2, JSON.stringify(item.id).search('"]'))) {
+                        console.log(product[j])
+                        this.setState({
+                            popupProduct: product[j]
+                        })
+                        console.log(this.state.popupProduct)
+                    }
+                }
+            }).catch(error => console.log(error));
+        // if (this.state.popupProduct.id.length === 0) {
+        //     this.setState({
+        //         test: true,
+        //         popupProduct: item,
+        //     })
+        //     console.log(this.state.popupProduct)
+        // } else {
+        //     this.setState({
+        //         test: false
+        //     })
+        // }
     }
-
+    closePopup() {
+        this.setState({
+            showPopup: false,
+        })
+    }
     logOut() {
         localStorage.removeItem('user')
         console.log('logout')
@@ -137,11 +187,11 @@ class UserProfile extends React.Component {
                                                         fontSize: '16px',
                                                         fontWeight: '600',
                                                         border: '0px',
-                                                        paddingRight:'45px',
-                                                        paddingLeft:'45px',
-                                                        paddingBottom:'12px',
-                                                        paddingTop:'10px',
-                                                        borderBottom:'1px solid whitesmoke'
+                                                        paddingRight: '45px',
+                                                        paddingLeft: '45px',
+                                                        paddingBottom: '12px',
+                                                        paddingTop: '10px',
+                                                        borderBottom: '1px solid whitesmoke'
                                                     }} className='popupLink'>Đổi mật khẩu</a>
                                                 </div>
                                                 <div style={{ textAlign: 'center', paddingBottom: '6px', }}>
@@ -151,11 +201,11 @@ class UserProfile extends React.Component {
                                                         fontSize: '16px',
                                                         fontWeight: '600',
                                                         border: '0px',
-                                                        paddingRight:'56px',
-                                                        paddingLeft:'56px',
-                                                        paddingBottom:'12px',
-                                                        paddingTop:'8px',
-                                                    }}className='popupLink'>Đăng xuất</a>
+                                                        paddingRight: '56px',
+                                                        paddingLeft: '56px',
+                                                        paddingBottom: '12px',
+                                                        paddingTop: '8px',
+                                                    }} className='popupLink'>Đăng xuất</a>
                                                 </div>
                                             </div>
                                         </Popup>
@@ -271,11 +321,25 @@ class UserProfile extends React.Component {
                             </Col>
                         </Row>
                         <Row style={{ marginLeft: '10%', marginRight: '10%' }}>
-                            {this.state.productimage.map((item, index) => (
-                                <a href='http://localhost:3000' onClick={() => this.clickimage(item)} key={index}>
-                                    <img src={item} alt='imagase' style={{ width: '25%', height: '25%', border: '1px solid rgba(0, 0, 0, .0975)' }} />
+                            {this.state.product.map((item, index) => (
+                                <a onClick={() => this.clickimage(item)} key={index} style={{ width: '25%', height: '25%' }}>
+                                    <img src={item.image} alt='imagase' style={{ width: '100%', height: '100%', border: '1px solid rgba(0, 0, 0, .0975)' }} />
                                 </a>
                             ))}
+                            {this.state.showPopup ?
+
+                                <div className='popup'>
+                                    <div className='popup_inner'>
+                                            <Row style={{ height: '100%' }}>
+                                                <Col xs='8' style={{ borderRight: '1px solid whitesmoke' }}>
+                                                    <img src={this.state.popupProduct.image_link}/>   
+                                                </Col>
+                                                <Col xs='4'>asdasd</Col>
+                                            </Row>
+                                        <Button onClick={() => this.closePopup()}>close</Button>
+                                    </div></div>
+                                : null
+                            }
                         </Row>
                         {/* </Container> */}
                     </div>
