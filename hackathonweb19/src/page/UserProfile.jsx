@@ -29,7 +29,7 @@ class UserProfile extends React.Component {
         showPopup: false,
         // popupProduct: { id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] },
         // test: false,
-        popupProduct:''
+        popupProduct: ''
     }
 
     componentDidMount() {
@@ -330,12 +330,35 @@ class UserProfile extends React.Component {
 
                                 <div className='popup'>
                                     <div className='popup_inner'>
-                                            <Row style={{ height: '100%' }}>
-                                                <Col xs='8' style={{ borderRight: '1px solid whitesmoke' }}>
-                                                    <img src={this.state.popupProduct.image_link}/>   
-                                                </Col>
-                                                <Col xs='4'>asdasd</Col>
-                                            </Row>
+                                        <Row style={{ height: '100%' }}>
+                                            <Col xs='8'
+                                                style={{
+                                                    borderRight: '1px solid whitesmoke',
+                                                    height: '100%',
+                                                    width: '100%',
+                                                }}>
+                                                <img src={this.state.popupProduct.image_link}
+                                                    style={{
+                                                        height: '100%',
+                                                        width: '100%',
+                                                    }} />
+                                            </Col>
+                                            <Col xs='4'>
+                                                <Row>
+                                                    <Col xs='2'>
+                                                        <img src={this.state.files}
+                                                            style={{
+                                                                borderRadius:'50%',
+                                                                border: '1px solid whitesmoke',
+                                                                height: '100%',
+                                                                width: '100%',
+                                                            }} />
+                                                    </Col>
+                                                    <Col xs='8'></Col>
+                                                    <Col xs='2'></Col>
+                                                </Row>
+                                            </Col>
+                                        </Row>
                                         <Button onClick={() => this.closePopup()}>close</Button>
                                     </div></div>
                                 : null
