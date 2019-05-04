@@ -20,6 +20,8 @@ const productSchema = new mongoose.Schema({
     info: String,
     image_link: String,
 
+
+
     // status : Number,
     createAt: {
         type: Date,
