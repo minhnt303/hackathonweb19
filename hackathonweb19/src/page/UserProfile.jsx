@@ -10,7 +10,10 @@ import SettingLogo from '../settinglogo.png'
 import GridLogo from '../gridlogo.png'
 import BookmarkLogo from '../bookmarklogo.png'
 import LikeLogo from '../likelogo.png'
+import DotLogo from '../doticon.png'
+import CloseLogo from '../closeLogo.png'
 import Popup from "reactjs-popup";
+import { Element } from 'react-scroll'
 class UserProfile extends React.Component {
 
     state = {
@@ -27,6 +30,7 @@ class UserProfile extends React.Component {
         productid: [],
         product: [{ id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] }],
         showPopup: false,
+        showPopup2: false,
         // popupProduct: { id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] },
         // test: false,
         popupProduct: ''
@@ -131,9 +135,29 @@ class UserProfile extends React.Component {
             showPopup: false,
         })
     }
+    openPopup2() {
+        this.setState({
+            showPopup2: true,
+        })
+    }
+    closePopup2() {
+        this.setState({
+            showPopup2: false,
+        })
+    }
+    copyLink() {
+        const copyText = window.location.pathname;
+        console.log(copyText)
+        document.execCommand("copy");
+        alert("Copied the text: " + copyText);
+    }
     logOut() {
         localStorage.removeItem('user')
         console.log('logout')
+    }
+
+    createPostDetail() {
+        window.location.href = 'http://localhost:3000/profile';
     }
 
     render() {
@@ -222,7 +246,7 @@ class UserProfile extends React.Component {
                                         </Col>
                                         <Col xs='2'>
                                             <span>
-                                                <span style={{ fontWeight: '600' }}>0
+                                                <span style={{ fontWeight: '600' }}>{this.state.product.like}
                                                 </span> lượt thích
                                             </span>
                                         </Col>
@@ -321,7 +345,7 @@ class UserProfile extends React.Component {
                             </Col>
                         </Row>
                         <Row style={{ marginLeft: '10%', marginRight: '10%' }}>
-                            {this.state.product.map((item, index) => (
+                            {this.state.product.map((item, index) => (// eslint-disable-next-line
                                 <a onClick={() => this.clickimage(item)} key={index} style={{ width: '25%', height: '25%' }}>
                                     <img src={item.image} alt='imagase' style={{ width: '100%', height: '100%', border: '1px solid rgba(0, 0, 0, .0975)' }} />
                                 </a>
@@ -329,6 +353,9 @@ class UserProfile extends React.Component {
                             {this.state.showPopup ?
 
                                 <div className='popup'>
+                                    <Button onClick={() => this.closePopup()} style={{ float: 'right', height: '40px', width: '40px', backgroundColor: 'rgba(0, 0, 0, 0)', borderColor: 'rgba(0, 0, 0, 0)' }}>
+                                        <img src={CloseLogo} alt='closelogo' style={{ float: 'center', height: '20px', width: '20px' }} />
+                                    </Button>
                                     <div className='popup_inner'>
                                         <Row style={{ height: '100%' }}>
                                             <Col xs='8'
@@ -341,28 +368,75 @@ class UserProfile extends React.Component {
                                                     style={{
                                                         height: '100%',
                                                         width: '100%',
-                                                    }} />
+                                                    }} alt='imageProduct' />
                                             </Col>
                                             <Col xs='4'>
-                                                <Row>
+                                                <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: '64px', paddingTop: '5%' }}>
                                                     <Col xs='2'>
-                                                        <img src={this.state.files}
+                                                        <img src={this.state.files} alt='imageUser'
                                                             style={{
-                                                                borderRadius:'50%',
+                                                                borderRadius: '50%',
                                                                 border: '1px solid whitesmoke',
-                                                                height: '100%',
-                                                                width: '100%',
+                                                                height: '35px',
+                                                                width: '35px'
                                                             }} />
                                                     </Col>
-                                                    <Col xs='8'></Col>
-                                                    <Col xs='2'></Col>
+                                                    <Col xs='8'>
+                                                        <a className='popupname' href='/profile'>{this.state.username}</a>
+                                                    </Col>
+                                                    <Col xs='2'>
+                                                        <Button onClick={() => this.openPopup2()} className='dotButton'>
+                                                            <img src={DotLogo}
+                                                                alt='dotlogo'
+                                                                style={{ height: '15 px', width: '12px', paddingBottom: '3px' }} />
+                                                        </Button>
+                                                        {this.state.showPopup2 ?
+                                                            <div className='popup2'>
+                                                                <div className='popup_inner2'>
+                                                                    <Button onClick={() => this.createPostDetail()} className='popup2Button'>Đi tới bài viết</Button><br />
+                                                                    <Button className='popup2Button'>Chia sẻ</Button><br />
+                                                                    <Button onClick={() => this.copyLink()} className='popup2Button'>Sao chép liên kết</Button><br />
+                                                                    <Button onClick={() => this.closePopup2()} className='popup2Button'>Hủy</Button><br />
+                                                                </div>
+                                                            </div> : null
+                                                        }
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: '100%', paddingTop: '5%' }}>
+                                                    <Col xs='2'>
+                                                    </Col>
+                                                    <Col xs='8'>
+                                                        <a className='popupname' href='/profile'>{this.state.popupProduct.name}</a>
+                                                        <div>
+                                                            <Element
+                                                                className="element"
+                                                                id="scroll-container"
+                                                                style={{
+                                                                    position: "relative",
+                                                                    height: "200px",
+                                                                    width: "235px",
+                                                                    overflow: "scroll"
+                                                                }}>
+                                                                <Element
+                                                                    name="scroll-container-first-element"
+                                                                    style={{
+                                                                        marginBottom: "200px",
+                                                                        overflow: "auto",
+                                                                        paddingRight: "15px", }}>
+                                                                    <span className='popupProductInfo'> {this.state.popupProduct.info}</span>
+                                                            </Element>
+                                                            </Element>
+                                                        </div>
+                                                    </Col>
+                                                <Col xs='2'>
+                                                </Col>
                                                 </Row>
                                             </Col>
                                         </Row>
-                                        <Button onClick={() => this.closePopup()}>close</Button>
-                                    </div></div>
-                                : null
-                            }
+
+                                </div></div>
+                        : null
+                    }
                         </Row>
                         {/* </Container> */}
                     </div>

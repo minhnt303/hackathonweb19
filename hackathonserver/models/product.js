@@ -29,7 +29,7 @@ const productSchema = new mongoose.Schema({
         default: 0,
     },
     like: {
-        type: Number,
+        type: Array,
         default: 0,
     },
 });

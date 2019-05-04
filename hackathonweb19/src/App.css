@@ -1,9 +1,9 @@
-.homepagelink{
+.homepagelink {
     color: hsl(210, 100%, 21%);
     text-decoration: none;
 }
 
-.homepagelink:hover{
+.homepagelink:hover {
     color: hsl(210, 100%, 21%);
     text-decoration: none;
 }
@@ -282,11 +282,12 @@ li a:hover {
 
 .userProfileImage {
     height: 150px;
+    width: 150px;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, .0975);
 }
 
-.userEditImage{
+.userEditImage {
     height: 40px;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, .0975);
@@ -301,40 +302,43 @@ li a:hover {
     text-decoration: none;
 }
 
-.editprofilemain{
+.editprofilemain {
     background-color: #fafafa;
     /* border: 1px solid rgba(0, 0, 0, .0975); */
     height: 500px;
-    margin-top:5%;
-    margin-left:20%;
-    margin-right:20%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 
-.row2:hover{
+.row2:hover {
     border-left: 2px solid rgba(0, 0, 0, .0975) !important;
     background-color: rgba(0, 0, 0, .02);
     text-decoration: none;
 }
-.row2link:hover{
+
+.row2link:hover {
     text-decoration: none;
 }
 
-.passwordeditprofilemain{
+.passwordeditprofilemain {
     background-color: #fafafa;
     /* border: 1px solid rgba(0, 0, 0, .0975); */
     height: 360px;
-    margin-top:5%;
-    margin-left:20%;
-    margin-right:20%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
-.profilelink:hover{
+
+.profilelink:hover {
     text-decoration: none;
 }
+
 .popup-content {
     border-radius: 8px;
 }
 
-.popupLink:hover{
+.popupLink:hover {
     text-decoration: none;
 }
 
@@ -347,9 +351,10 @@ li a:hover {
     right: 0;
     bottom: 0;
     margin: auto;
-    background-color: rgba(0,0,0, 0.5);
-  }
-  .popup_inner {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup_inner {
     position: absolute;
     left: 15%;
     right: 15%;
@@ -357,4 +362,61 @@ li a:hover {
     bottom: 8%;
     margin: auto;
     background: white;
-  }
+}
+
+.popup2 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup_inner2 {
+    position: absolute;
+    left: 40%;
+    right: 40%;
+    top: 35%;
+    bottom: 35%;
+    margin: auto;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popupname {
+    color: #262626;
+    text-decoration: none;
+    font-weight: 600;
+    line-height: 2;
+}
+
+.popupname:hover{
+    color: #262626;
+    text-decoration: none;
+}
+
+.dotButton{
+    background-color: white !important;
+    border-color: white!important;
+    border: 0px;
+}
+
+.popup2Button{
+    height: 25%;
+    width: 100%;
+    color: #262626 !important;
+    background-color: white !important;
+    border-color: white !important;
+    border-radius: 10px !important;
+}
+
+.popupProductInfo{
+    font-weight: 400;
+    color: #262626;
+    line-height: 2;
+}
