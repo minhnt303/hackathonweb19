@@ -405,17 +405,17 @@ class UserProfile extends React.Component {
                                                 <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: '100%', paddingTop: '5%' }}>
                                                     <Col xs='2'>
                                                     </Col>
-                                                    <Col xs='8'>
+                                                    <Col xs='10'>
                                                         <a className='popupname' href='/profile'>{this.state.popupProduct.name}</a>
-                                                        <div>
+                                                        <div className='scrollcontent'>
                                                             <Element
                                                                 className="element"
                                                                 id="scroll-container"
                                                                 style={{
                                                                     position: "relative",
-                                                                    height: "200px",
-                                                                    width: "235px",
-                                                                    overflow: "scroll"
+                                                                    height: "350px",
+                                                                    width: "238px",
+                                                                    overflowY: "scroll"
                                                                 }}>
                                                                 <Element
                                                                     name="scroll-container-first-element"
@@ -428,8 +428,6 @@ class UserProfile extends React.Component {
                                                             </Element>
                                                         </div>
                                                     </Col>
-                                                <Col xs='2'>
-                                                </Col>
                                                 </Row>
                                             </Col>
                                         </Row>
