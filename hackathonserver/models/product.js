@@ -20,9 +20,6 @@ const productSchema = new mongoose.Schema({
     info: String,
     image_link: String,
 
-
-
-    
     // status : Number,
     createAt: {
         type: Date,
@@ -33,8 +30,7 @@ const productSchema = new mongoose.Schema({
         default: 0,
     },
     like: {
-        type: Array,
-        default: 0,
+        type: Array
     },
 });
 

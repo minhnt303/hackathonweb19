@@ -97,6 +97,7 @@ class EditProfile extends React.Component {
         const url = 'http://localhost:3001/upload';
         const formData = new FormData();
         formData.append('avatar', file)
+        console.log(formData)
         const config = {
             headers: {
                 'content-type': 'multipart/form-data'
@@ -133,7 +134,7 @@ class EditProfile extends React.Component {
                     console.log('Edit false')
                 } else {
                     console.log('Edit success')
-                    console.log(this.state)
+                    console.log(this.state.files)
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].email === localStorage.getItem('user')) {
                             axios({

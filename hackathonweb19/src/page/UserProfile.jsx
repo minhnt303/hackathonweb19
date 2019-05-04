@@ -28,6 +28,7 @@ class UserProfile extends React.Component {
         facebooklink: '',
         productimage: [],
         productid: [],
+        like: '',
         product: [{ id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] }],
         showPopup: false,
         showPopup2: false,
@@ -62,7 +63,7 @@ class UserProfile extends React.Component {
                             .then(productdata => {
                                 let product = productdata.data;
                                 let count = 0;
-                                // console.log(product)
+                                console.log(product)
                                 for (let j = 0; j < product.length; j++) {
                                     // console.log(data[i]._id, product[j].user_Id)
                                     if (data[i]._id === product[j].user_Id) {
@@ -85,10 +86,22 @@ class UserProfile extends React.Component {
                                     }
                                 }
                                 this.state.product.shift();
-                                console.log(this.state.product)
                                 this.setState({
                                     product: this.state.product,
                                     post: count,
+                                })
+
+                                console.log(this.state.product)
+                                let likecount = 0;
+                                for (let j = 0; j < product.length; j++) {
+                                    if (data[i]._id === product[j].user_Id) {
+                                        console.log(product[j].like.length);
+                                        likecount = (product[j].like.length - 1) + likecount;
+                                    }
+                                }
+                                console.log(likecount)
+                                this.setState({
+                                    like: likecount,
                                 })
                             })
                             .catch(error => console.log(error));
@@ -246,7 +259,7 @@ class UserProfile extends React.Component {
                                         </Col>
                                         <Col xs='2'>
                                             <span>
-                                                <span style={{ fontWeight: '600' }}>{this.state.product.like}
+                                                <span style={{ fontWeight: '600' }}>{this.state.like}
                                                 </span> lượt thích
                                             </span>
                                         </Col>
@@ -422,9 +435,10 @@ class UserProfile extends React.Component {
                                                                     style={{
                                                                         marginBottom: "200px",
                                                                         overflow: "auto",
-                                                                        paddingRight: "15px", }}>
+                                                                        paddingRight: "15px",
+                                                                    }}>
                                                                     <span className='popupProductInfo'> {this.state.popupProduct.info}</span>
-                                                            </Element>
+                                                                </Element>
                                                             </Element>
                                                         </div>
                                                     </Col>
@@ -432,9 +446,9 @@ class UserProfile extends React.Component {
                                             </Col>
                                         </Row>
 
-                                </div></div>
-                        : null
-                    }
+                                    </div></div>
+                                : null
+                            }
                         </Row>
                         {/* </Container> */}
                     </div>
