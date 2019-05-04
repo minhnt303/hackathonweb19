@@ -23,6 +23,8 @@ class CreatePost extends React.Component {
                 <p>duusus</p>
                 <Container>
                 
+                    
+            <div>jhdudfsdifjidjfi</div>
                 </Container>
             </div>
         )

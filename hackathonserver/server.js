@@ -6,6 +6,9 @@ const cors = require('cors');
 const expressSession = require('express-session');
 const userModel = require('./models/user');
 const productModel = require('./models/product');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
+
 mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
     if (err) {
         throw err;
@@ -61,11 +64,11 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         }
     });
 
-    app.post("/api/product", async (req, res) => {
+    app.post("/api/product", upload.single('avatar'), async (req, res) => {
         console.log(req.body);
         var product = new productModel(req.body);
         product.save(function (err, product) {
-            res.json(product)
+            res.json(product)   
         })
     });
 
