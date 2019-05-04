@@ -58,6 +58,7 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
             const data = await productModel.find({})
                 .skip(pageSize * (pageNumber - 1))
                 .limit(Number(pageSize))
+                .populate({path: 'user_Id', model: 'User'})
                 .exec();
             res.status(200).json(data)
         } catch (err) {

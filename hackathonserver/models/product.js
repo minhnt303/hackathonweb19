@@ -22,7 +22,6 @@ const productSchema = new mongoose.Schema({
 
 
 
-    
     // status : Number,
     createAt: {
         type: Date,
