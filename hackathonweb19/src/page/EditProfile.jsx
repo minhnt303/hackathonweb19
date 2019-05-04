@@ -1,12 +1,12 @@
 import React from 'react';
 import '../App.css'
 import { Row, Col, Input, Container, Label, Button, Form } from 'reactstrap';
-import axios from 'axios';
+import axios, { post } from 'axios';
 import config from '../config';
 import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar2';
 // import Popup from "reactjs-popup";
-import FileBase64 from 'react-file-base64';
+// import FileBase64 from 'react-file-base64';
 class EditProfile extends React.Component {
 
     state = {
@@ -17,6 +17,7 @@ class EditProfile extends React.Component {
         phone: '',
         address: '',
         image: '',
+        oldimage: '',
         files: '',
         divVisiable: false
     }
@@ -27,7 +28,8 @@ class EditProfile extends React.Component {
                 let data = response.data;
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].email === localStorage.getItem('user')) {
-                        console.log(data[i]);
+                        // console.log(data[i]);
+
                         this.setState({
                             email: data[i].email,
                             username: data[i].username,
@@ -36,7 +38,12 @@ class EditProfile extends React.Component {
                             phone: data[i].phone,
                             address: data[i].address,
                             image: data[i].avatarUrl,
-                            fires: data[i].avatarUrl
+                            oldimage: data[i].avatarUrl
+                        })
+                        let path = config.baseUrl + '/' + this.state.image;
+                        console.log(path)
+                        this.setState({
+                            image: path
                         })
                         console.log(this.state)
                     }
@@ -44,6 +51,7 @@ class EditProfile extends React.Component {
             })
             .catch(error => console.log(error));
     }
+
     handleInputChangeUsername = (value) => {
         this.setState({
             username: value
@@ -80,20 +88,43 @@ class EditProfile extends React.Component {
     }
     getFiles(files) {
         console.log(files);
-        this.setState({ files: files[0].base64, divVisiable: true });
+        // this.setState({ files: files[0].base64, divVisiable: true });
+        // console.log(this.state)
+        this.setState({ files: files.target.files[0] })
+    }
+    fileUpload(file) {
+        console.log(file)
+        const url = 'http://localhost:3001/upload';
+        const formData = new FormData();
+        formData.append('avatar', file)
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        return post(url, formData, config)
     }
     handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state);
-        console.log(config.baseUrl);
-
+        this.fileUpload(this.state.files).then((response) => {
+            console.log(config.baseUrl + '/' + JSON.parse(JSON.stringify(response.data)));
+            let path = JSON.parse(JSON.stringify(response.data));
+            console.log(path)
+            this.setState({
+                files: path
+            })
+            console.log(this.state)
+        })
+        axios.get(`${config.baseUrl}/deleteimage/${this.state.oldimage}`).then(response => { console.log(response) }).catch((error) => {
+            console.log(error);
+        });
         axios.get(`${config.baseUrl}/api/user`)
             .then(response => {
                 let data = response.data;
                 let valid = true;
                 console.log(data);
                 if (this.state.password === '' || this.state.username === '' || this.state.zaloid === '' ||
-                    this.state.facebookid === '' || this.state.address === ''|| this.state.fires === '') {
+                    this.state.facebookid === '' || this.state.address === '' || this.state.fires === '') {
                     console.log('Please input all feild');
                     valid = false;
                 }
@@ -111,12 +142,14 @@ class EditProfile extends React.Component {
                             })
                                 .then((response) => {
                                     console.log(response.data);
-                                    
+                                    console.log(this.state)
                                     window.location.href = 'http://localhost:3000/profile'
                                 })
                                 .catch((error) => {
                                     console.log(error);
                                 });
+                            console.log(this.state.files, this.state.image)
+
                         }
                     }
                 }
@@ -134,7 +167,7 @@ class EditProfile extends React.Component {
                 </div>
                 <div className='editprofilemain'>
                     <Container style={{ backgroundColor: 'white', padding: '0px' }}>
-                        <Form onSubmit={this.handleSubmit}>
+                        <Form onSubmit={this.handleSubmit} encType="multipart/form-data">
                             <Row style={{ color: 'hsl(0, 0%, 15%)' }}>
                                 <Col xs="4" style={{ borderRight: '1px solid rgba(0, 0, 0, .0975)', height: '407px', padding: '0px' }}>
                                     <div className="row1"
@@ -327,13 +360,15 @@ class EditProfile extends React.Component {
                                             >Thay đổi ảnh đại diện</Label>
                                         </Col>
                                         <Col xs='9'
-                                        style={{
+                                            style={{
                                                 marginTop: '7px'
                                             }}>
-                                            <FileBase64
+                                            <Input
                                                 multiple={true}
-                                                onDone={this.getFiles.bind(this)}
+                                                onChange={this.getFiles.bind(this)}
+                                                type="file"
                                             />
+                                            {/* <Input type="file" name="avatar" onChange={this.getFiles}/> */}
                                             {this.state.divVisiable ?
                                                 (
                                                     <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px' }}>

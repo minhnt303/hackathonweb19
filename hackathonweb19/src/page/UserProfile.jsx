@@ -10,6 +10,10 @@ import SettingLogo from '../settinglogo.png'
 import GridLogo from '../gridlogo.png'
 import BookmarkLogo from '../bookmarklogo.png'
 import LikeLogo from '../likelogo.png'
+import DotLogo from '../doticon.png'
+import CloseLogo from '../closeLogo.png'
+import Popup from "reactjs-popup";
+import { Element } from 'react-scroll'
 class UserProfile extends React.Component {
 
     state = {
@@ -19,11 +23,17 @@ class UserProfile extends React.Component {
         zaloid: '',
         phone: '',
         address: '',
-        image: '',
+        files: '',
         post: '',
         facebooklink: '',
         productimage: [],
         productid: [],
+        product: [{ id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] }],
+        showPopup: false,
+        showPopup2: false,
+        // popupProduct: { id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] },
+        // test: false,
+        popupProduct: ''
     }
 
     componentDidMount() {
@@ -40,8 +50,13 @@ class UserProfile extends React.Component {
                             zaloid: data[i].zaloId,
                             phone: data[i].phone,
                             address: data[i].address,
-                            image: data[i].avatarUrl,
+                            files: data[i].avatarUrl,
                             facebooklink: 'https://www.messenger.com/t/' + data[i].fbId,
+                        })
+                        let path = config.baseUrl + '/' + this.state.files;
+                        console.log(path)
+                        this.setState({
+                            files: path
                         })
                         axios.get(`${config.baseUrl}/api/product`)
                             .then(productdata => {
@@ -54,25 +69,95 @@ class UserProfile extends React.Component {
                                         count = count + 1;
                                         this.setState({
                                             productimage: [...this.state.productimage, product[j].image_link],
-                                            productid: [...this.state.productid, product[j]._id]
+                                            productid: [...this.state.productid, product[j]._id],
+                                            // product:[{id:[product[0]._id],image:[product[0].image_link]}]
+                                            product: [...this.state.product, {
+                                                id: [product[j]._id],
+                                                name: [product[j].name],
+                                                image: [product[j].image_link],
+                                                catalog: [product[j].catalog_Id],
+                                                price: [product[j].price],
+                                                discount: [product[j].discount],
+                                                info: [product[j].info],
+                                                like: [product[j].like],
+                                            }]
                                         })
                                     }
                                 }
+                                this.state.product.shift();
+                                console.log(this.state.product)
                                 this.setState({
+                                    product: this.state.product,
                                     post: count,
                                 })
-                                // console.log(this.state)
                             })
                             .catch(error => console.log(error));
-                        // console.log(this.state)
+                        console.log(this.state)
                     }
                 }
             })
             .catch(error => console.log(error));
     }
 
-    clickimage(item){
-        console.log(item);
+    clickimage(item) {
+        console.log(JSON.stringify(item.id).slice(2, JSON.stringify(item.id).search('"]')));
+        this.setState({
+            showPopup: true,
+            popupProduct: item,
+        });
+        axios.get(`${config.baseUrl}/api/product`)
+            .then(productdata => {
+                let product = productdata.data;
+                for (let j = 0; j < product.length; j++) {
+                    if (product[j]._id === JSON.stringify(item.id).slice(2, JSON.stringify(item.id).search('"]'))) {
+                        console.log(product[j])
+                        this.setState({
+                            popupProduct: product[j]
+                        })
+                        console.log(this.state.popupProduct)
+                    }
+                }
+            }).catch(error => console.log(error));
+        // if (this.state.popupProduct.id.length === 0) {
+        //     this.setState({
+        //         test: true,
+        //         popupProduct: item,
+        //     })
+        //     console.log(this.state.popupProduct)
+        // } else {
+        //     this.setState({
+        //         test: false
+        //     })
+        // }
+    }
+    closePopup() {
+        this.setState({
+            showPopup: false,
+        })
+    }
+    openPopup2() {
+        this.setState({
+            showPopup2: true,
+        })
+    }
+    closePopup2() {
+        this.setState({
+            showPopup2: false,
+        })
+    }
+    copyLink() {
+        const copyText = window.location.pathname;
+        console.log(copyText)
+        document.execCommand("copy");
+        alert("Copied the text: " + copyText);
+    }
+    logOut() {
+        localStorage.removeItem('user')
+        console.log('logout')
+    }
+
+    createPostDetail() {
+        window.location.href = 'http://localhost:3000/profile';
     }
 
     render() {
@@ -88,7 +173,7 @@ class UserProfile extends React.Component {
                         {/* <Container> */}
                         <Row style={{ borderBottom: '1px solid rgba(0, 0, 0, .0975)', paddingBottom: '20px' }}>
                             <Col style={{ textAlign: 'center' }} xs='4'>
-                                <img src={this.state.image}
+                                <img src={this.state.files}
                                     alt="weima-userProfileImage"
                                     className='userProfileImage' />
                             </Col>
@@ -107,10 +192,48 @@ class UserProfile extends React.Component {
                                                 lineHeight: '18px'
                                             }}>Chỉnh sửa trang cá nhân</Button>
                                         </a>
-                                        <img src={SettingLogo}
+                                        <Popup trigger={<Button
+                                            style={{
+                                                backgroundColor: 'white',
+                                                color: 'hsl(0, 0%, 15%)',
+                                                padding: '0px',
+                                                border: '0px',
+                                            }}
+                                        ><img src={SettingLogo}
                                             alt="weima-settinglogo"
                                             className='settinglogo'
-                                            style={{ fontSize: '14px', lineHeight: '18px', height: '25px' }} />
+                                            style={{ fontSize: '14px', lineHeight: '18px', height: '25px' }} /></Button>} position="right center">
+                                            <div>
+                                                <div style={{ textAlign: 'center', paddingBottom: '6px', }}>
+                                                    <a href='http://localhost:3000/password/change' style={{
+                                                        backgroundColor: 'white',
+                                                        color: 'hsl(0, 0%, 15%)',
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        border: '0px',
+                                                        paddingRight: '45px',
+                                                        paddingLeft: '45px',
+                                                        paddingBottom: '12px',
+                                                        paddingTop: '10px',
+                                                        borderBottom: '1px solid whitesmoke'
+                                                    }} className='popupLink'>Đổi mật khẩu</a>
+                                                </div>
+                                                <div style={{ textAlign: 'center', paddingBottom: '6px', }}>
+                                                    <a href='http://localhost:3000/login' onClick={this.logOut} style={{
+                                                        backgroundColor: 'white',
+                                                        color: 'hsl(0, 0%, 15%)',
+                                                        fontSize: '16px',
+                                                        fontWeight: '600',
+                                                        border: '0px',
+                                                        paddingRight: '56px',
+                                                        paddingLeft: '56px',
+                                                        paddingBottom: '12px',
+                                                        paddingTop: '8px',
+                                                    }} className='popupLink'>Đăng xuất</a>
+                                                </div>
+                                            </div>
+                                        </Popup>
+
                                     </h1>
                                 </div>
                                 <div className="profilerow2" style={{ color: 'hsl(0, 0%, 15%)' }}>
@@ -123,7 +246,7 @@ class UserProfile extends React.Component {
                                         </Col>
                                         <Col xs='2'>
                                             <span>
-                                                <span style={{ fontWeight: '600' }}>0
+                                                <span style={{ fontWeight: '600' }}>{this.state.product.like}
                                                 </span> lượt thích
                                             </span>
                                         </Col>
@@ -222,11 +345,98 @@ class UserProfile extends React.Component {
                             </Col>
                         </Row>
                         <Row style={{ marginLeft: '10%', marginRight: '10%' }}>
-                            {this.state.productimage.map((item, index)=>(
-                                <a onClick={ () => this.clickimage(item)} key={index}>
-                                    <img  src={item}  alt='imagase' style={{width:'25%', height:'25%', border: '1px solid rgba(0, 0, 0, .0975)'}}/>
+                            {this.state.product.map((item, index) => (// eslint-disable-next-line
+                                <a onClick={() => this.clickimage(item)} key={index} style={{ width: '25%', height: '25%' }}>
+                                    <img src={item.image} alt='imagase' style={{ width: '100%', height: '100%', border: '1px solid rgba(0, 0, 0, .0975)' }} />
                                 </a>
                             ))}
+                            {this.state.showPopup ?
+
+                                <div className='popup'>
+                                    <Button onClick={() => this.closePopup()} style={{ float: 'right', height: '40px', width: '40px', backgroundColor: 'rgba(0, 0, 0, 0)', borderColor: 'rgba(0, 0, 0, 0)' }}>
+                                        <img src={CloseLogo} alt='closelogo' style={{ float: 'center', height: '20px', width: '20px' }} />
+                                    </Button>
+                                    <div className='popup_inner'>
+                                        <Row style={{ height: '100%' }}>
+                                            <Col xs='8'
+                                                style={{
+                                                    borderRight: '1px solid whitesmoke',
+                                                    height: '100%',
+                                                    width: '100%',
+                                                }}>
+                                                <img src={this.state.popupProduct.image_link}
+                                                    style={{
+                                                        height: '100%',
+                                                        width: '100%',
+                                                    }} alt='imageProduct' />
+                                            </Col>
+                                            <Col xs='4'>
+                                                <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: '64px', paddingTop: '5%' }}>
+                                                    <Col xs='2'>
+                                                        <img src={this.state.files} alt='imageUser'
+                                                            style={{
+                                                                borderRadius: '50%',
+                                                                border: '1px solid whitesmoke',
+                                                                height: '35px',
+                                                                width: '35px'
+                                                            }} />
+                                                    </Col>
+                                                    <Col xs='8'>
+                                                        <a className='popupname' href='/profile'>{this.state.username}</a>
+                                                    </Col>
+                                                    <Col xs='2'>
+                                                        <Button onClick={() => this.openPopup2()} className='dotButton'>
+                                                            <img src={DotLogo}
+                                                                alt='dotlogo'
+                                                                style={{ height: '15 px', width: '12px', paddingBottom: '3px' }} />
+                                                        </Button>
+                                                        {this.state.showPopup2 ?
+                                                            <div className='popup2'>
+                                                                <div className='popup_inner2'>
+                                                                    <Button onClick={() => this.createPostDetail()} className='popup2Button'>Đi tới bài viết</Button><br />
+                                                                    <Button className='popup2Button'>Chia sẻ</Button><br />
+                                                                    <Button onClick={() => this.copyLink()} className='popup2Button'>Sao chép liên kết</Button><br />
+                                                                    <Button onClick={() => this.closePopup2()} className='popup2Button'>Hủy</Button><br />
+                                                                </div>
+                                                            </div> : null
+                                                        }
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: '100%', paddingTop: '5%' }}>
+                                                    <Col xs='2'>
+                                                    </Col>
+                                                    <Col xs='8'>
+                                                        <a className='popupname' href='/profile'>{this.state.popupProduct.name}</a>
+                                                        <div>
+                                                            <Element
+                                                                className="element"
+                                                                id="scroll-container"
+                                                                style={{
+                                                                    position: "relative",
+                                                                    height: "200px",
+                                                                    width: "235px",
+                                                                    overflow: "scroll"
+                                                                }}>
+                                                                <Element
+                                                                    name="scroll-container-first-element"
+                                                                    style={{
+                                                                        marginBottom: "200px",
+                                                                        overflow: "auto",
+                                                                        paddingRight: "15px", }}>
+                                                                    <span className='popupProductInfo'> {this.state.popupProduct.info}</span>
+                                                            </Element>
+                                                            </Element>
+                                                        </div>
+                                                    </Col>
+                                                <Col xs='2'>
+                                                </Col>
+                                                </Row>
+                                            </Col>
+                                        </Row>
+
+                                </div></div>
+                        : null
+                    }
                         </Row>
                         {/* </Container> */}
                     </div>

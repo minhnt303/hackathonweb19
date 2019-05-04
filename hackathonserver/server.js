@@ -6,8 +6,8 @@ const cors = require('cors');
 const expressSession = require('express-session');
 const userModel = require('./models/user');
 const productModel = require('./models/product');
-const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+var multer = require('multer')
+var upload = multer({ dest: 'upload/' })
 
 mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
     if (err) {
@@ -18,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
     const app = express();
 
     app.use(express.static('public'));
+    app.use('/upload', express.static('public'))
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
 
@@ -72,15 +73,44 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         })
     });
 
-    app.get("/updateprofile/:userId/:username&:facebooid&:zaloid&:phone&:address", async (req, res) => {
-        const { userId, username, facebooid, zaloid, phone, address } = req.params;
-        console.log(userId, username, facebooid, zaloid, phone, address);
+    app.post('/upload', upload.single('avatar'), function (req, res) {
+        console.log(`new upload = ${req.file.filename}\n`);
+        console.log(req.file);
+        const path = req.file.path.split('\\').join('/');
+        console.log(path)
+        res.json(req.file.filename);
+    })
+
+    app.get('/:imageid', async (req, res) => {
+        const fs = require('fs');
+        // const { imageid } = req.params;
+        // console.log(imageid);
+        // res.setHeader('Content-Type', storedMimeType)
+        fs.createReadStream(path.join('upload/', req.params.imageid)).pipe(res)
+    })
+
+    app.get('/deleteimage/:imageid', async (req, res) => {
+        const fs = require('fs');
+        // const { imageid } = req.params;
+        // console.log(imageid);
+        // res.setHeader('Content-Type', storedMimeType)
+        console.log('upload/'+req.params.imageid)
+        const path = 'upload/'+req.params.imageid
+        fs.unlink(path, (err) => {
+            if (err) throw err;
+            console.log('successfully deleted /tmp/hello');
+          });
+    })
+
+    app.get("/updateprofile/:userId/:username&:facebooid&:zaloid&:phone&:address&:image", async (req, res) => {
+        const { userId, username, facebooid, zaloid, phone, address,image } = req.params;
+        console.log(userId, username, facebooid, zaloid, phone, address,image);
         const existedUser = await userModel.findById(userId).exec();
         if (!existedUser) {
             console.log(1)
             res.status(404).end('User not found');
         } else {
-            await userModel.findByIdAndUpdate(userId, { $set: { username: username, fbId: facebooid, zaloId: zaloid, phone: phone, address: address } }).exec();
+            await userModel.findByIdAndUpdate(userId, { $set: { username: username, fbId: facebooid, zaloId: zaloid, phone: phone, address: address, avatarUrl: image } }).exec();
             res.status(200).end('Update success')
         }
     })
