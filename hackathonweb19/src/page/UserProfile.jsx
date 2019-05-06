@@ -12,11 +12,14 @@ import BookmarkLogo from '../bookmarklogo.png'
 import LikeLogo from '../likelogo.png'
 import DotLogo from '../doticon.png'
 import CloseLogo from '../closeLogo.png'
+import HeartLogo from '../heartlogo.png'
+import HeartLogoClick from '../heartlogoclick.png'
 import Popup from "reactjs-popup";
 import { Element } from 'react-scroll'
 class UserProfile extends React.Component {
 
     state = {
+        userid: '',
         email: '',
         username: '',
         facebookid: '',
@@ -29,15 +32,18 @@ class UserProfile extends React.Component {
         productimage: [],
         productid: [],
         like: '',
-        product: [{ id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] }],
+        product: [{
+            id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [],
+            likeclick: false,
+        }],
         showPopup: false,
         showPopup2: false,
         // popupProduct: { id: [], name: [], image: [], catalog: [], price: [], discount: [], info: [], like: [] },
         // test: false,
-        popupProduct: ''
+        popupProduct: '',
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         axios.get(`${config.baseUrl}/api/user`)
             .then(response => {
                 let data = response.data;
@@ -45,6 +51,7 @@ class UserProfile extends React.Component {
                     if (data[i].email === localStorage.getItem('user')) {
                         // console.log(data[i]);
                         this.setState({
+                            userid: data[i]._id,
                             email: data[i].email,
                             username: data[i].username,
                             facebookid: data[i].fbId,
@@ -55,7 +62,6 @@ class UserProfile extends React.Component {
                             facebooklink: 'https://www.messenger.com/t/' + data[i].fbId,
                         })
                         let path = config.baseUrl + '/' + this.state.files;
-                        console.log(path)
                         this.setState({
                             files: path
                         })
@@ -63,7 +69,6 @@ class UserProfile extends React.Component {
                             .then(productdata => {
                                 let product = productdata.data;
                                 let count = 0;
-                                console.log(product)
                                 for (let j = 0; j < product.length; j++) {
                                     // console.log(data[i]._id, product[j].user_Id)
                                     if (data[i]._id === product[j].user_Id) {
@@ -81,6 +86,7 @@ class UserProfile extends React.Component {
                                                 discount: [product[j].discount],
                                                 info: [product[j].info],
                                                 like: [product[j].like],
+                                                likeclick: false,
                                             }]
                                         })
                                     }
@@ -90,22 +96,58 @@ class UserProfile extends React.Component {
                                     product: this.state.product,
                                     post: count,
                                 })
+                                // for(let j = 0; j < this.state.product.length; j++){
+                                //     // console.log(this.state.product[j].like[0].length)
+                                //     // if(this.state.product[j].like[0][j])
+                                //     for(let a = 0; a < this.state.product[j].like[0].length; a++){
+                                //         console.log(this.state.product[j].like[0][a])
+                                //         if(this.state.product[j].like[0][a] === this.state.userid){
+                                //             console.log(this.state.product)
+                                //             let stateproduct = this.state.product[j];
+                                //         }else{
+                                //             // let stateproduct = this.state.product[j];
+                                //             // this.setState({...this.state,
+                                //             //     product:[{...stateproduct, likeclick:false,}]
+                                //             // })
+                                //         }
+                                //     }
+                                // }
+                                this.state.product.map(async (productValue) => {
+                                    // console.log(productValue)
+                                    if (productValue.like[0].indexOf(this.state.userid) !== -1) {
+                                        await this.setState({
+                                            product: this.state.product.map((value) => {
+                                                // console.log(value.id, productValue.id)
+                                                if (value.id === productValue.id) {
+                                                    return {
+                                                        ...value,
+                                                        likeclick: true
+                                                    }
+                                                }
+                                                else {
+                                                    return {
+                                                        ...value
+                                                    };
+                                                }
+                                            })
+                                        })
+                                    }
+                                })
 
-                                console.log(this.state.product)
+                                console.log(this.state.product);
                                 let likecount = 0;
                                 for (let j = 0; j < product.length; j++) {
                                     if (data[i]._id === product[j].user_Id) {
-                                        console.log(product[j].like.length);
-                                        likecount = (product[j].like.length - 1) + likecount;
+                                        likecount = (product[j].like.length) + likecount;
                                     }
                                 }
-                                console.log(likecount)
                                 this.setState({
                                     like: likecount,
                                 })
                             })
                             .catch(error => console.log(error));
-                        console.log(this.state)
+
+                        // console.log(this.state)
                     }
                 }
             })
@@ -113,23 +155,29 @@ class UserProfile extends React.Component {
     }
 
     clickimage(item) {
-        console.log(JSON.stringify(item.id).slice(2, JSON.stringify(item.id).search('"]')));
         this.setState({
             showPopup: true,
             popupProduct: item,
         });
+        console.log(item)
         axios.get(`${config.baseUrl}/api/product`)
             .then(productdata => {
                 let product = productdata.data;
                 for (let j = 0; j < product.length; j++) {
                     if (product[j]._id === JSON.stringify(item.id).slice(2, JSON.stringify(item.id).search('"]'))) {
-                        console.log(product[j])
                         this.setState({
                             popupProduct: product[j]
                         })
-                        console.log(this.state.popupProduct)
+                        this.setState({
+                            popupProduct: {
+                                ...this.state.popupProduct,
+                                likeclick: item.likeclick
+                            }
+                        })
+                        console.log(this.state.popupProduct, j)
                     }
                 }
+
             }).catch(error => console.log(error));
         // if (this.state.popupProduct.id.length === 0) {
         //     this.setState({
@@ -167,6 +215,33 @@ class UserProfile extends React.Component {
     logOut() {
         localStorage.removeItem('user')
         console.log('logout')
+    }
+    like() {
+        axios.get(`${config.baseUrl}/like/${this.state.popupProduct._id}/${this.state.userid}`).then(response => { console.log(response) }).catch((error) => {
+            console.log(error);
+        });
+        console.log(this.state.popupProduct.likeclick)
+        this.setState({
+            popupProduct: {
+                ...this.state.popupProduct,
+                likeclick: true
+            }
+        })
+        console.log(this.state.popupProduct.likeclick)
+    }
+
+    dislike() {
+        axios.get(`${config.baseUrl}/dislike/${this.state.popupProduct._id}/${this.state.userid}`).then(response => { console.log(response) }).catch((error) => {
+            console.log(error);
+        });
+        console.log(this.state.popupProduct.likeclick)
+        this.setState({
+            popupProduct: {
+                ...this.state.popupProduct,
+                likeclick: false
+            }
+        })
+        console.log(this.state.popupProduct.likeclick)
     }
 
     createPostDetail() {
@@ -415,7 +490,7 @@ class UserProfile extends React.Component {
                                                         }
                                                     </Col>
                                                 </Row>
-                                                <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: '100%', paddingTop: '5%' }}>
+                                                <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: "450px", paddingTop: '5%' }}>
                                                     <Col xs='2'>
                                                     </Col>
                                                     <Col xs='10'>
@@ -426,7 +501,7 @@ class UserProfile extends React.Component {
                                                                 id="scroll-container"
                                                                 style={{
                                                                     position: "relative",
-                                                                    height: "350px",
+                                                                    height: "390px",
                                                                     width: "238px",
                                                                     overflowY: "scroll"
                                                                 }}>
@@ -443,6 +518,22 @@ class UserProfile extends React.Component {
                                                         </div>
                                                     </Col>
                                                 </Row>
+                                                {/* <Row style={{ borderBottom: '1px solid whitesmoke', width: '100%', height: '100%', paddingTop: '5%' }}> */}
+                                                {console.log(this.state.popupProduct.likeclick)}
+                                                {
+                                                    this.state.popupProduct.likeclick ?
+                                                        <Button onClick={() => this.dislike()} className='dislikeButton'>
+                                                            <img src={HeartLogoClick}
+                                                                alt='heartlogoclick'
+                                                                style={{ height: '30 px', width: '30px' }} />
+                                                        </Button>
+                                                        :
+                                                        <Button onClick={() => this.like()} className='likeButton'>
+                                                            <img src={HeartLogo}
+                                                                alt='heartlogo'
+                                                                style={{ height: '30 px', width: '30px' }} />
+                                                        </Button>}
+                                                {/* </Row> */}
                                             </Col>
                                         </Row>
 

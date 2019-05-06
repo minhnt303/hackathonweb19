@@ -58,7 +58,6 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
             const data = await productModel.find({})
                 .skip(pageSize * (pageNumber - 1))
                 .limit(Number(pageSize))
-                .populate({path: 'user_Id', model: 'User'})
                 .exec();
             res.status(200).json(data)
         } catch (err) {
@@ -70,7 +69,7 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         console.log(req.body);
         var product = new productModel(req.body);
         product.save(function (err, product) {
-            res.json(product)   
+            res.json(product)
         })
     });
 
@@ -95,17 +94,17 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         // const { imageid } = req.params;
         // console.log(imageid);
         // res.setHeader('Content-Type', storedMimeType)
-        console.log('upload/'+req.params.imageid)
-        const path = 'upload/'+req.params.imageid
+        console.log('upload/' + req.params.imageid)
+        const path = 'upload/' + req.params.imageid
         fs.unlink(path, (err) => {
             if (err) throw err;
             console.log('successfully deleted /tmp/hello');
-          });
+        });
     })
 
     app.get("/updateprofile/:userId/:username&:facebooid&:zaloid&:phone&:address&:image", async (req, res) => {
-        const { userId, username, facebooid, zaloid, phone, address,image } = req.params;
-        console.log(userId, username, facebooid, zaloid, phone, address,image);
+        const { userId, username, facebooid, zaloid, phone, address, image } = req.params;
+        console.log(userId, username, facebooid, zaloid, phone, address, image);
         const existedUser = await userModel.findById(userId).exec();
         if (!existedUser) {
             console.log(1)
@@ -138,6 +137,30 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
             res.status(404).end('User not found');
         } else {
             await userModel.findByIdAndUpdate(userId, { $set: { avatarUrl: image } }).exec();
+            res.status(200).end('Update success')
+        }
+    })
+
+    app.get("/like/:productId/:userId", async (req, res) => {
+        const { productId, userId } = req.params;
+        const existedProductr = await productModel.findById(productId).exec();
+        if (!existedProductr) {
+            console.log(1)
+            res.status(404).end('User not found');
+        } else {
+            await productModel.findByIdAndUpdate(productId, { $push: { like: userId } }).exec();
+            res.status(200).end('Update success')
+        }
+    })
+
+    app.get("/dislike/:productId/:userId", async (req, res) => {
+        const { productId, userId } = req.params;
+        const existedProductr = await productModel.findById(productId).exec();
+        if (!existedProductr) {
+            console.log(1)
+            res.status(404).end('User not found');
+        } else {
+            await productModel.findByIdAndUpdate(productId, { $pull: { like: userId } }).exec();
             res.status(200).end('Update success')
         }
     })
