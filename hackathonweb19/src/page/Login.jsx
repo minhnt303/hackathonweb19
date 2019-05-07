@@ -64,7 +64,7 @@ class Login extends React.Component {
                 <div className="main">
                     <div className="login-form">
                         <h1 className="logo-name">Weima</h1>
-                        <Form onSubmit={this.handleSubmit}>
+                        <Form onSubmit={this.handleSubmit} >
                             <Input
                                 type='text'
                                 placeholder='Tên người dùng hoặc email'
@@ -75,7 +75,7 @@ class Login extends React.Component {
                                 placeholder='Mật khẩu'
                                 onChange={(e) => { this.handleInputChangePassword(e.target.value) }} />
                             <div style={{ height: 18 }}></div>
-                            <Button className="loginButton" style={{ backgroundColor: 'hsl(209, 86%, 58%)', border: 'hsl(209, 86%, 58%)', fontWeight: 'bold' }}>Đăng nhập</Button>
+                            <Button className="loginButton" style={{ backgroundColor: 'hsl(209, 86%, 58%)', border: 'hsl(209, 86%, 58%)', fontWeight: 'bold', width: '100%' }}>Đăng nhập</Button>
                         </Form>
                     </div>
                     <div className="register-of-login">

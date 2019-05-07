@@ -75,6 +75,79 @@
     color: hsl(0, 0%, 15%);
 }
 
+@media only screen and (max-width: 500px) {
+    .searchArea {
+        display: none;
+    }
+
+    .profilePortArea {
+        padding-top: 10px;
+    }
+    .logotd {
+        padding-top: 12px;
+        text-align:center;
+    }
+    .login-form {
+        border: 1px solid rgba(0, 0, 0, .0975);
+        background-color: white;
+        margin: 100px auto 0 !important;
+        justify-content: center;
+        height: 58% !important;
+        width: 80% !important;
+        text-align: center;
+    }
+    .register-form {
+        border: 1px solid rgba(0, 0, 0, .0975);
+        background-color: white;
+        margin: 20px auto 0;
+        width: 80% !important;
+        justify-content: center;
+        text-align: center;
+    }
+    .register-of-login {
+        border: 1px solid rgba(0, 0, 0, .0975);
+        background-color: white;
+        margin: 30px auto 0;
+        padding-top: 20px;
+        justify-content: center;
+        height: 70px;
+        width: 80% !important;
+        text-align: center;
+    }
+    .login-of-register {
+        border: 1px solid rgba(0, 0, 0, .0975);
+        background-color: white;
+        margin: 30px auto 0;
+        padding-top: 20px;
+        justify-content: center;
+        height: 70px;
+        width: 80% !important;
+        text-align: center;
+    }
+    .footer{
+        display:none;
+    }
+    .logo-name {
+        font-size: 90px;
+        margin-bottom: 30px !important;
+        margin-top: 30px;
+        height: 80px;
+        font-family: 'BillabongW00-Regular', sans-serif;
+        color: hsl(0, 0%, 15%);
+    }
+    .navbar-area {
+        margin-left: 0% !important;
+        margin-right: 5% !important;
+        padding-bottom: 0px;
+        justify-content: center;
+    }
+    .container {
+        border: 1px solid rgba(0, 0, 0, .0975);
+        width: 900px;
+        height: 80% !important;
+    }
+}
+
 .register-text {
     font-size: 17px;
     margin-top: 0px;
@@ -105,7 +178,7 @@
     background-color: white;
     margin: 30px auto 0;
     justify-content: center;
-    height: 53%;
+    height: 58%;
     width: 30%;
     text-align: center;
 }
@@ -268,7 +341,7 @@ li a:hover {
 .container {
     border: 1px solid rgba(0, 0, 0, .0975);
     width: 900px;
-    height: 100%;
+    height: 80%;
 }
 
 .profileMain {
@@ -278,6 +351,84 @@ li a:hover {
     padding-right: 60px;
     padding-left: 60px;
     /* background-color: white; */
+}
+
+@media only screen and (min-width: 501px) {
+    .mobile {
+        display: none !important;
+    }
+
+    .EditProfile{
+        height: 750px !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .profileMain {
+        width: 100%;
+        height: 700px;
+        padding-top: 20px;
+        padding-right: 30px;
+        padding-left: 30px;
+        background-color: #fafafa;
+    }
+    .profileMain
+    .userProfileImage {
+        height: 77px !important;
+        width: 77px !important;
+        border-radius: 50%;
+        border: 1px solid rgba(0, 0, 0, .0975);
+    }
+
+    .desktop {
+        display: none !important;
+    }
+    .popup {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .popup_inner {
+        position: absolute;
+        left: 1% !important;
+        right: 1% !important;
+        top: 5% !important;
+        bottom: 1% !important;
+        margin: auto;
+        background: white;
+    }
+    .popup_inner2 {
+        position: absolute;
+        left: 20% !important;
+        right: 20% !important;
+        top: 35%;
+        bottom: 35%;
+        margin: auto;
+        background: white;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .editprofilemain {
+        background-color: #fafafa;
+        /* border: 1px solid rgba(0, 0, 0, .0975); */
+        height: 500px;
+        margin-top: 5%;
+        margin-left: 0% !important;
+        margin-right: 0% !important;
+    }
+    .EditProfile{
+        height: 600px !important;
+    }
+    .d-flex .row{
+        width: 90% !important;
+    }
 }
 
 .userProfileImage {
@@ -395,18 +546,18 @@ li a:hover {
     line-height: 2;
 }
 
-.popupname:hover{
+.popupname:hover {
     color: #262626;
     text-decoration: none;
 }
 
-.dotButton{
+.dotButton {
     background-color: white !important;
-    border-color: white!important;
+    border-color: white !important;
     border: 0px;
 }
 
-.popup2Button{
+.popup2Button {
     height: 25%;
     width: 100%;
     color: #262626 !important;
@@ -415,24 +566,24 @@ li a:hover {
     border-radius: 10px !important;
 }
 
-.popupProductInfo{
+.popupProductInfo {
     font-weight: 400;
     color: #262626;
     line-height: 2;
 }
 
-.scrollcontent{
+.scrollcontent {
     overflow: hidden;
 }
 
-.likeButton{
-    margin-top:10px;
+.likeButton {
+    margin-top: 10px;
     background-color: white !important;
     border-color: white !important;
     padding: 0px !important;
 }
-.dislikeButton{
-    margin-top:10px;
+
+.dislikeButton {
     background-color: white !important;
     border-color: white !important;
     padding: 0px !important;

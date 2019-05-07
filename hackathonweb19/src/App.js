@@ -36,6 +36,9 @@ import CreatePost from './page/CreatePost';
 import HomePage from './page/HomePage.jsx';
 import EditProfile from './page/EditProfile';
 import PasswordChange from './page/PasswordChange'
+import SavedProduct from './page/SavedProduct'
+import LikedProduct from './page/LikedProduct'
+import ProductDetail from './page/ProductDetail';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 class App extends Component {
   render() {
@@ -53,6 +56,9 @@ class App extends Component {
           <Route path='/home' component={HomePage} />
           <Route path='/profile' component={UserProfile} />
           <Route path='/editprofile' component={EditProfile} />
+          <Route path='/savedproduct' component={SavedProduct}/>
+          <Route path='/likedproduct' component={LikedProduct}/>
+          <Route path='/productdetail' component={ProductDetail}/>
           <Route path='/password/change' component={PasswordChange} />
         </BrowserRouter>
       </div>

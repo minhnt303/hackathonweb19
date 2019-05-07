@@ -12,9 +12,6 @@ const NavBar = (props) => {
                             <span className="logoName"><img src={logo} alt="weima-logo" className='classLogo' />Weima</span>
                         </a>
                     </td>
-                    <td>
-                        <div className="user">login register</div>
-                    </td>
                 </tr>
             </tbody>
         </table >

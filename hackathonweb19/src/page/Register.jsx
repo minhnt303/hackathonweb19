@@ -184,7 +184,7 @@ class Register extends React.Component {
                                 ) : null
                             }
                             <div style={{ height: 18 }}></div>
-                            <Button className="registerButton" style={{ backgroundColor: 'hsl(209, 86%, 58%)', border: 'hsl(209, 86%, 58%)', fontWeight: 'bold' }}>Đăng ký</Button>
+                            <Button className="registerButton" style={{ backgroundColor: 'hsl(209, 86%, 58%)', border: 'hsl(209, 86%, 58%)', fontWeight: 'bold',width: '100%' }}>Đăng ký</Button>
                         </Form>
                         <p className="register-text2">Bằng cách đăng ký, bạn đồng ý với <a href="http://localhost:3000/register" style={{ fontWeight: "600", textDecoration: "none" }}>Điều khoản,</a>
                             <a href="http://localhost:3000/register" style={{ fontWeight: "600", textDecoration: "none" }}>Chính sách dữ liệu</a> và
