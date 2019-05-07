@@ -15,7 +15,7 @@ const NavBar = (props) => {
                             <span className="logoName"><img src={logo} alt="weima-logo" className='classLogo' />Weima</span>
                         </a>
                     </td>
-                    <td style={{ textAlign: 'center' }}>
+                    <td style={{ textAlign: 'center' }} className="searchArea">
                         <div className="Search">
                             <form className="Search-form">
                                 <Input className="search" type="search" placeholder="Tìm kiếm" aria-label="Search" style={{ backgroundColor: "#fafafa" }} />
@@ -23,7 +23,7 @@ const NavBar = (props) => {
                         </div>
                     </td>
 
-                    <td style={{ textAlign: 'right', paddingBottom: '10px' }}>
+                    <td style={{ textAlign: 'right', paddingBottom: '10px' }} className="profilePortArea">
                         <a href="http://localhost:3000/createpost"><img src={portlogo} alt="weima-userlogo" className='classuserLogo' /></a>
                         <a href="http://localhost:3000/profile"><img src={userlogo} alt="weima-userlogo" className='classuserLogo' style={{ marginLeft: "20px" }} /></a>
                     </td>

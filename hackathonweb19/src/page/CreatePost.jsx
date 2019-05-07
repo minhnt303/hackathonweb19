@@ -115,7 +115,7 @@ class CreatePost extends React.Component {
                     <div>Popup content here !!<Button>jas</Button></div>
                 </Popup> */}
                 <div style={{ height: 18 }}></div>
-                <div className='container' style={{ width: "900px", backgroundColor: 'white' }}>
+                <div className='container desktop' style={{ backgroundColor: 'white' }}>
                     <div style={{ height: 18 }}></div>
                     <h1 className='mt-3 mb-2 fong' >Create Post</h1> {/*Không được sửa do lỗi font khi viết tiếng việt*/}
                     <div className=' d-flex justify-content-between'>
@@ -165,6 +165,61 @@ class CreatePost extends React.Component {
                                         ) : null
                                     }
                                     <Button type="submit" className="btn btn-danger">Đăng sản phẩm</Button>
+                                </Form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='container mobile' style={{ backgroundColor: 'white' }}>
+                    <div style={{ height: 18 }}></div>
+                    <h1 className='mt-3 mb-2 fong' >Create Post</h1> {/*Không được sửa do lỗi font khi viết tiếng việt*/}
+                    <div className=' d-flex justify-content-between'>
+                        <div className="row">
+                            <div className='col'>
+                                <Form className="w-100" onSubmit={this.handleSubmit}>
+                                    <div className="form-group">
+                                        {/* <label>Tên sản phẩm</label> */}
+                                        <Input type="text" className="name" id="product" onChange={(e) => { this.handleInputChangeName(e.target.value) }} placeholder="Tên sản phẩm" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                    </div>
+                                    <div className="form-group">
+                                        {/* <label>Giá sản phẩm</label> */}
+                                        <Input type="number" className="price" id="price" onChange={(e) => { this.handleInputChangePrice(e.target.value) }} placeholder="Giá sản phẩm (VND)" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                    </div>
+                                    <div className="form-group">
+                                        {/* <label>Chiết khấu</label> */}
+                                        <Input type="number" className="discount" id="discount" onChange={(e) => { this.handleInputChangeDiscount(e.target.value) }} placeholder="Chiết khấu (%)" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                    </div>
+                                    <div className="form-group">
+                                        {/* <label>Chiết khấu</label> */}
+                                        <Input type="textarea" className="info" id="info" onChange={(e) => { this.handleInputChangeInfo(e.target.value) }} placeholder="Thông tin về sản phẩm" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }} />
+                                    </div>
+                                    <div className="form-group">
+                                        {/* <label>Danh mục</label> */}
+                                        <Input type="select" className="form-control" onChange={(e) => { this.handleInputChangeCatalog(e.target.value) }} id="exampleFormControlSelect1" style={{ backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)' }}>
+                                            <option>Danh mục</option>
+                                            <option>Điện tử</option>
+                                            <option>Thời trang</option>
+                                            <option>Nông Sản</option>
+                                            <option>Thực phẩm</option>
+                                            <option>Hàng Hóa</option>
+                                        </Input>
+                                    </div>
+                                    <div className="form-group">
+                                        {/* <label>Ảnh sản phẩm</label> */}
+                                        {/* <Input type="file" className="image" id="images" name="images[]" onChange={(e) => { this.handleInputChangeImage(e.target.value) }} style={{ height: '45px', backgroundColor: '#fafafa', border: '1px solid hsl(0, 0%, 88%)', paddingTop: "6px", paddingLeft: "6px" }} multiple /> */}
+                                        <FileBase64
+                                            multiple={true}
+                                            onDone={this.getFiles.bind(this)}
+                                        />
+                                    </div>
+                                    {this.state.divVisiable ?
+                                        (
+                                            <div className="row" style={{ boxSizing: 'border-box', margin: '4px 0px', marginBottom: '20px', with: '200px', height: '30px' }}>
+                                                <img src={this.state.files} alt="anh_san_pham" with="200px" height="30px" />
+                                            </div>
+                                        ) : null
+                                    }
+                                    <Button type="submit" className="btn btn-danger" style={{width:'100%'}}>Đăng sản phẩm</Button>
                                 </Form>
                             </div>
                         </div>

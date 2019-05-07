@@ -32,8 +32,7 @@ const productSchema = new mongoose.Schema({
         default: 0,
     },
     like: {
-        type: Array,
-        default: 0,
+        type: Array
     },
 });
 
