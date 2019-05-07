@@ -3,7 +3,6 @@ import logo from '../../logo.png'
 import '../../App.css';
 const NavBar = (props) => {
     return (
-
         <table>
             <tbody>
                 <tr className="NavBar">

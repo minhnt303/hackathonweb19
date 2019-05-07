@@ -58,6 +58,28 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
             const data = await productModel.find({})
                 .skip(pageSize * (pageNumber - 1))
                 .limit(Number(pageSize))
+                .exec();
+            res.status(200).json(data)
+        } catch (err) {
+            res.status(500).end(err.message)
+        }
+    });
+
+
+    app.get("/api/product2", async (req, res) => {
+        // productModel.find({}, function (err, product) {
+        //     if (err) {
+        //         res.send('something aSSADASD')
+        //         next();
+        //     }
+        //     res.json(product)
+        // })
+        try {
+            const { pageNumber, pageSize } = req.query;
+            const totalRecord = await productModel.find().countDocuments();
+            const data = await productModel.find({})
+                .skip(pageSize * (pageNumber - 1))
+                .limit(Number(pageSize))
                 .populate({path: 'user_Id', model: 'User'})
                 .exec();
             res.status(200).json(data)
