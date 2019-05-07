@@ -575,7 +575,6 @@ li a:hover {
 .scrollcontent {
     overflow: hidden;
 }
-<<<<<<< HEAD
 /* Css cho trang home */
 .homePage {
     width: 100%;
@@ -742,18 +741,3 @@ p.title-productname{
     font-style: inherit;
     color: #262626;
 }
-=======
-
-.likeButton {
-    margin-top: 10px;
-    background-color: white !important;
-    border-color: white !important;
-    padding: 0px !important;
-}
-
-.dislikeButton {
-    background-color: white !important;
-    border-color: white !important;
-    padding: 0px !important;
-}
->>>>>>> 0add17a1697a68b6af6031c8ddf32664877fe514
