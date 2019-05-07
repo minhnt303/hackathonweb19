@@ -144,7 +144,7 @@
     .container {
         border: 1px solid rgba(0, 0, 0, .0975);
         width: 900px;
-        height: 80% !important;
+        height: 100% !important;
     }
 }
 
@@ -341,7 +341,7 @@ li a:hover {
 .container {
     border: 1px solid rgba(0, 0, 0, .0975);
     width: 900px;
-    height: 80%;
+    height: 100%;
 }
 
 .profileMain {

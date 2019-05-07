@@ -61,7 +61,15 @@ class UserProfile extends React.Component {
                             files: data[i].avatarUrl,
                             facebooklink: 'https://www.messenger.com/t/' + data[i].fbId,
                         })
-                        let path = config.baseUrl + '/' + this.state.files;
+                        // let path = config.baseUrl + '/' + this.state.files;
+                        let path ='';
+                        if (this.state.files.search('data') === -1 && this.state.files !== 'https://www.malverninternational.com/wp-content/uploads/2016/12/Male-Avatar.png') {
+                            path = config.baseUrl + '/' + this.state.files;
+                        } else if (this.state.files.search('data') !== -1 && this.state.files !== 'https://www.malverninternational.com/wp-content/uploads/2016/12/Male-Avatar.png') {
+                            path = this.state.files;
+                        } else {
+                            path = this.state.files;
+                        }
                         this.setState({
                             files: path
                         })
@@ -542,7 +550,7 @@ class UserProfile extends React.Component {
                                 : null
                             }
                         </Row>
-                        
+
                         <Row className="mobile">
                             <Row style={{ marginBottom: '5px' }}>
                                 <Col style={{ textAlign: 'center' }} xs='4'>

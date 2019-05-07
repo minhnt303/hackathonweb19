@@ -65,6 +65,28 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         }
     });
 
+    app.get("/api/product2", async (req, res) => {
+        // productModel.find({}, function (err, product) {
+        //     if (err) {
+        //         res.send('something aSSADASD')
+        //         next();
+        //     }
+        //     res.json(product)
+        // })
+        try {
+            const { pageNumber, pageSize } = req.query;
+            const totalRecord = await productModel.find().countDocuments();
+            const data = await productModel.find({})
+                .skip(pageSize * (pageNumber - 1))
+                .limit(Number(pageSize))
+                .populate({path: 'user_Id', model: 'User'})
+                .exec();
+            res.status(200).json(data)
+        } catch (err) {
+            res.status(500).end(err.message)
+        }
+    });
+
     app.post("/api/product", upload.single('avatar'), async (req, res) => {
         console.log(req.body);
         var product = new productModel(req.body);
@@ -72,7 +94,6 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
             res.json(product)
         })
     });
-
     app.post('/upload', upload.single('avatar'), function (req, res) {
         console.log(`new upload = ${req.file.filename}\n`);
         console.log(req.file);

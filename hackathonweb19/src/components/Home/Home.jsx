@@ -36,7 +36,7 @@ class Home extends Component {
                 </div>
               </div>
               <div className="number-like">
-                <p>{this.props.ArraySP.like[0]} like</p>
+                <p>{this.props.ArraySP.like.length} like</p>
               </div>
               <div className="description">
                 <p className="title-productname">

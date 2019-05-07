@@ -48,11 +48,11 @@ class Login extends React.Component {
                 } else {
                     console.log('Login success')
                     localStorage.setItem('user', this.state.email)
+                    window.location.href='http://localhost:3000/home'
                 }
             })
             .catch(error => console.log(error));
     }
-
     render() {
         return (
             <div className='Login'>
@@ -71,7 +71,7 @@ class Login extends React.Component {
                                 onChange={(e) => { this.handleInputChangeEmail(e.target.value) }} />
                             <div style={{ height: 18 }}></div>
                             <Input
-                                type='text'
+                                type='password'
                                 placeholder='Mật khẩu'
                                 onChange={(e) => { this.handleInputChangePassword(e.target.value) }} />
                             <div style={{ height: 18 }}></div>

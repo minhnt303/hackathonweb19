@@ -40,7 +40,15 @@ class EditProfile extends React.Component {
                             image: data[i].avatarUrl,
                             oldimage: data[i].avatarUrl
                         })
-                        let path = config.baseUrl + '/' + this.state.image;
+                        // let path = config.baseUrl + '/' + this.state.image;
+                        let path ='';
+                        if (this.state.image.search('data') === -1 && this.state.image !== 'https://www.malverninternational.com/wp-content/uploads/2016/12/Male-Avatar.png') {
+                            path = config.baseUrl + '/' + this.state.image;
+                        } else if (this.state.image.search('data') !== -1 && this.state.image !== 'https://www.malverninternational.com/wp-content/uploads/2016/12/Male-Avatar.png') {
+                            path = this.state.image;
+                        } else {
+                            path = this.state.image;
+                        }
                         console.log(path)
                         this.setState({
                             image: path
