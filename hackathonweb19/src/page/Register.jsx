@@ -10,6 +10,7 @@ import FileBase64 from 'react-file-base64';
 
 class Register extends React.Component {
     state = {
+        home:'',
         email: '',
         username: '',
         facebookid: '',
@@ -20,7 +21,17 @@ class Register extends React.Component {
         files: '',
         divVisiable: false
     };
-
+    componentDidMount(){
+        if(localStorage.getItem('user')!== null){
+            this.setState({
+                home: 'http://localhost:3000/home',
+            })
+        } else (
+            this.setState({
+                home: 'http://localhost:3000',
+            })
+        )
+    }
     handleInputChangeEmail = (value) => {
         this.setState({
             email: value
@@ -130,7 +141,7 @@ class Register extends React.Component {
             <div className='Login'>
                 <div className="navbar">
                     <div className="navbar-area">
-                        <NavBar />
+                        <NavBar value={this.state.home}/>
                     </div>
                 </div>
                 <div className="main-register">

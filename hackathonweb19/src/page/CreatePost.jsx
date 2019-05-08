@@ -8,7 +8,19 @@ import NavBar from '../components/NavBar/NavBar2';
 import FileBase64 from 'react-file-base64';
 // import Popup from "reactjs-popup";
 class CreatePost extends React.Component {
+    componentDidMount(){
+        if(localStorage.getItem('user')!== null){
+            this.setState({
+                home: 'http://localhost:3000/home',
+            })
+        } else (
+            this.setState({
+                home: 'http://localhost:3000',
+            })
+        )
+    }
     state = {
+        home:'',
         name: '',
         price: '',
         discount: '',
@@ -80,6 +92,7 @@ class CreatePost extends React.Component {
                 } else {
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].email === localStorage.getItem('user')) {
+                            
                             console.log('email');
                             console.log(data[i]._id)
                             axios({
@@ -108,7 +121,7 @@ class CreatePost extends React.Component {
             <div className='Login' style={{ backgroundColor: '#fafafa', height: '635px' }}>
                 <div className="navbar2">
                     <div className="navbar-area">
-                        <NavBar />
+                        <NavBar value={this.state.home}/>
                     </div>
                 </div>
                 {/* <Popup trigger={<button> Trigger</button>} position="right center">

@@ -8,10 +8,21 @@ import { withRouter } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar'
 class Login extends React.Component {
     state = {
+        home:'',
         email: '',
         password: '',
     };
-
+    componentDidMount(){
+        if(localStorage.getItem('user')!== null){
+            this.setState({
+                home: 'http://localhost:3000/home',
+            })
+        } else (
+            this.setState({
+                home: 'http://localhost:3000',
+            })
+        )
+    }
     handleInputChangeEmail = (value) => {
         this.setState({
             email: value
@@ -58,7 +69,7 @@ class Login extends React.Component {
             <div className='Login'>
                 <div className="navbar">
                     <div className="navbar-area">
-                        <NavBar />
+                        <NavBar value={this.state.home}/>
                     </div>
                 </div>
                 <div className="main">

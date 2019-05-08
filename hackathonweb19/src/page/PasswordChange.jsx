@@ -9,6 +9,7 @@ import NavBar from '../components/NavBar/NavBar2';
 class PasswordChange extends React.Component {
 
     state = {
+        home:'',
         email: '',
         username: '',
         image: '',
@@ -18,6 +19,15 @@ class PasswordChange extends React.Component {
     }
 
     componentDidMount() {
+        if(localStorage.getItem('user')!== null){
+            this.setState({
+                home: 'http://localhost:3000/home',
+            })
+        } else (
+            this.setState({
+                home: 'http://localhost:3000',
+            })
+        )
         axios.get(`${config.baseUrl}/api/user`)
             .then(response => {
                 let data = response.data;
@@ -115,7 +125,7 @@ class PasswordChange extends React.Component {
             <div className='EditProfile' style={{ backgroundColor: '#fafafa', height: '750px' }}>
                 <div className="navbar2">
                     <div className="navbar-area">
-                        <NavBar />
+                        <NavBar value={this.state.home}/>
                     </div>
                 </div>
                 <div className='passwordeditprofilemain'>

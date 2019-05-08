@@ -15,6 +15,7 @@ import Home from "../components/Home/Home";
 
 class HomePage extends React.Component {
   state = {
+    home:'',
     // nhung thu lay tu user
     users: {
       userName: '',
@@ -93,6 +94,7 @@ class HomePage extends React.Component {
               data[i].avatarUrl = path;
             }
             this.setState({
+              home: 'http://localhost:3000/home',
               users: {
                 userId: data[i]._id,
                 userName: data[i].username,
@@ -152,7 +154,7 @@ class HomePage extends React.Component {
       <div className="homePage">
         <div className="navbar2">
           <div className="navbar-area">
-            <NavBar />
+            <NavBar value={this.state.home}/>
           </div>
         </div>
         <div className="background-home">

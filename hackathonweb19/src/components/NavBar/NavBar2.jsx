@@ -6,12 +6,13 @@ import '../../App.css';
 import { Input } from 'reactstrap';
 // import { IoIosSearch } from "react-icons/io";
 const NavBar = (props) => {
+    console.log(props)
     return (
         <table>
             <tbody>
                 <tr className="NavBar2">
                     <td className="logotd">
-                        <a href='http://localhost:3000' className='homepagelink'>
+                        <a href={props.value} className='homepagelink'>
                             <span className="logoName"><img src={logo} alt="weima-logo" className='classLogo' />Weima</span>
                         </a>
                     </td>

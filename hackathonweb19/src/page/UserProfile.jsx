@@ -19,6 +19,7 @@ import { Element } from 'react-scroll'
 class UserProfile extends React.Component {
 
     state = {
+        home:'',
         userid: '',
         email: '',
         username: '',
@@ -51,6 +52,7 @@ class UserProfile extends React.Component {
                     if (data[i].email === localStorage.getItem('user')) {
                         // console.log(data[i]);
                         this.setState({
+                            home: 'http://localhost:3000/home',
                             userid: data[i]._id,
                             email: data[i].email,
                             username: data[i].username,
@@ -142,7 +144,7 @@ class UserProfile extends React.Component {
                                     }
                                 })
 
-                                console.log(this.state.product);
+                                console.log(this.state);
                                 let likecount = 0;
                                 for (let j = 0; j < product.length; j++) {
                                     if (data[i]._id === product[j].user_Id) {
@@ -261,7 +263,7 @@ class UserProfile extends React.Component {
             <div className='Profile' style={{ backgroundColor: '#fafafa', height: '635px' }}>
                 <div className="navbar2">
                     <div className="navbar-area">
-                        <NavBar />
+                        <NavBar value={this.state.home}/>
                     </div>
                 </div>
                 <div className="profileMain">
