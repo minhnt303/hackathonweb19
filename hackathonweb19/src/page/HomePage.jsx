@@ -85,34 +85,97 @@ class HomePage extends React.Component {
             let path = data[i].user_Id.avatarUrl;
             data[i].user_Id.avatarUrl = path;
           }
-          
-            
-          for (let j = 0; j < data[i].like.length; j++) {
-            
-            axios.get(`${config.baseUrl}/api/user`)
-            .then(response => {
-              let dataUser = response.data;
-              for (let k = 0; k < dataUser.length; k++) {
-                if (dataUser[k].email === localStorage.getItem('user')) {
-                  if (data[i].like[j] === dataUser[k]._id){
-                    console.log(1)
-                    // this.setState({
-                    //   likeclicked: true,
-                    // })
-                  } else {
-                    console.log(2)
-                    // this.setState({
-                    //   likeclicked: false,
-                    // })
-                  }
-                }
-                
-          // console.log(this.state)
-              }
-            })
-            .catch(error => console.log(error));
-          }
+
+
+          // for (let j = 0; j < data[i].like.length; j++) {
+          //   debugger
+          //   console.log(j)
+          //   axios.get(`${config.baseUrl}/api/user`)
+          //     .then(responseUser => {
+          //       debugger
+          //       let dataUser = responseUser.data;
+          //       for (let k = 0; k < dataUser.length; k++) {
+          //         if (dataUser[k].email === localStorage.getItem('user')) {
+          //           if (data[i].like[j] === dataUser[k]._id) {
+          //             likearray.push(data[i]._id)
+          //             debugger
+          //             // this.setState({
+          //             //   likeclicked: true,
+          //             // })
+          //           } else {
+          //             notlikearray.push(data[i]._id)
+          //             // this.setState({
+          //             //   likeclicked: false,
+          //             // })
+          //           }
+          //         }
+
+          //         // console.log(this.state)
+          //       }
+          //     })
+          //     .catch(error => console.log(error));
+          // }
+          // console.log(likearray)
+          // debugger
+
+          // console.log(data[i].like)
+          // axios.get(`${config.baseUrl}/api/user`)
+          //   .then(responseUser => {
+          //     let dataUser = responseUser.data;
+          //     for (let k = 0; k < dataUser.length; k++) {
+          //       if (dataUser[k].email === localStorage.getItem('user')) {
+          //         data[i].like.map((value)=>{
+          //           if(value === dataUser[k]._id){
+          //             let a = {
+          //               likeclicked:true,
+          //               userId: data[i].user_Id,
+          //               nameProduct: data[i].name,
+          //               catalog_Id: data[i].catalog_Id,
+          //               price: data[i].price,
+          //               discount: data[i].discount,
+          //               info: data[i].info,
+          //               image_link: data[i].image_link,
+          //               createAt: data[i].createAt,
+          //               view: data[i].view,
+          //               like: data[i].like
+          //             };
+          //             tam.push(a);
+          //             return tam;
+          //           }
+          //           else{
+          //             let a = {
+          //               likeclicked:false,
+          //               userId: data[i].user_Id,
+          //               nameProduct: data[i].name,
+          //               catalog_Id: data[i].catalog_Id,
+          //               price: data[i].price,
+          //               discount: data[i].discount,
+          //               info: data[i].info,
+          //               image_link: data[i].image_link,
+          //               createAt: data[i].createAt,
+          //               view: data[i].view,
+          //               like: data[i].like
+          //             };
+          //             tam.push(a);
+          //             return tam;
+          //           }
+          //         })
+          //       }
+          //     }
+          //   })
+          //   .catch(error => console.log(error));
+
+          // for (let k = -1; k < likearray.length; k++) {
+          //   console.log(data[i]._id , likearray[k])
+          //   if (data[i]._id === likearray[k]) {
+          //     console.log(data[i]._id , likearray[k])
+          //   } else {
+          //     console.log(data[i]._id , likearray[k])
+          //   }
+          // }
+
           let a = {
+            likeclicked: false,
             userId: data[i].user_Id,
             nameProduct: data[i].name,
             catalog_Id: data[i].catalog_Id,
@@ -126,9 +189,29 @@ class HomePage extends React.Component {
           };
           tam.push(a);
         }
+        axios.get(`${config.baseUrl}/api/user`)
+          .then(responseUser => {
+            let dataUser = responseUser.data;
+            for (let k = 0; k < dataUser.length; k++) {
+              if (dataUser[k].email === localStorage.getItem('user')) {
+                for (let i = 0; i < tam.length; i++) {
+                  for(let j = 0; j< tam[i].like.length; j++){
+                    if(tam[i].like[j] === dataUser[k]._id){
+                      tam[i].likeclicked = true;
+                    } else {
+                      tam[i].likeclicked = false;
+                    }
+                  }
+                }
+              }
+            }
+          })
+          .catch(error => console.log(error));
+        console.log(tam)
         this.setState({
           products: [...tam]
         })
+        console.log(this.state.products)
       })
       .catch(error => console.log(error));
   }
