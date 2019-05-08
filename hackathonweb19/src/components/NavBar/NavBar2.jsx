@@ -6,7 +6,6 @@ import '../../App.css';
 import { Input } from 'reactstrap';
 // import { IoIosSearch } from "react-icons/io";
 const NavBar = (props) => {
-    console.log(props)
     return (
         <table>
             <tbody>

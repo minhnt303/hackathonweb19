@@ -429,6 +429,28 @@ li a:hover {
     .d-flex .row{
         width: 90% !important;
     }
+    .user{
+        display: none;
+    }
+    .img-product img {
+        width: 100%;
+        height: 50% !important;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+    .img-product{
+        height: 70% !important;
+    }
+    .content-product{
+        width: 100% !important;
+    }
+    .user-image{
+        margin-left:10px;
+    }
+    .user-Nameuser{
+        margin-left:10px;
+    }
 }
 
 .userProfileImage {
@@ -604,7 +626,6 @@ li a:hover {
     width: 90%;
     background-color: white;
     margin: auto;
-    margin-left:95px;
 }
 .user{
     width: 35%;

@@ -533,13 +533,13 @@ class UserProfile extends React.Component {
                                                 {console.log(this.state.popupProduct.likeclick)}
                                                 {
                                                     this.state.popupProduct.likeclick ?
-                                                        <Button onClick={() => this.dislike()} className='dislikeButton'>
+                                                        <Button onClick={() => this.dislike()} className='dislikeButton' style={{borderColor: ' white', backgroundColor: 'white'}}>
                                                             <img src={HeartLogoClick}
                                                                 alt='heartlogoclick'
                                                                 style={{ height: '30 px', width: '30px' }} />
                                                         </Button>
                                                         :
-                                                        <Button onClick={() => this.like()} className='likeButton'>
+                                                        <Button onClick={() => this.like()} className='likeButton' style={{borderColor: ' white', backgroundColor: 'white'}}>
                                                             <img src={HeartLogo}
                                                                 alt='heartlogo'
                                                                 style={{ height: '30 px', width: '30px' }} />
@@ -819,14 +819,14 @@ class UserProfile extends React.Component {
                                             {
                                                 this.state.popupProduct.likeclick ?
                                                     <Button onClick={() => this.dislike()} className='dislikeButton'
-                                                        style={{ marginLeft: '5px' }} >
+                                                        style={{ marginLeft: '5px', borderColor: ' white', backgroundColor: 'white' }} >
                                                         <img src={HeartLogoClick}
                                                             alt='heartlogoclick'
                                                             style={{ height: '30 px', width: '30px' }} />
                                                     </Button>
                                                     :
                                                     <Button onClick={() => this.like()} className='likeButton'
-                                                        style={{ marginLeft: '5px' }} >
+                                                        style={{ marginLeft: '5px', borderColor: ' white', backgroundColor: 'white' }} >
                                                         <img src={HeartLogo}
                                                             alt='heartlogo'
                                                             style={{ height: '30 px', width: '30px' }} />

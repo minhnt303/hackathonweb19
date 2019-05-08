@@ -15,7 +15,7 @@ import Home from "../components/Home/Home";
 
 class HomePage extends React.Component {
   state = {
-    home:'',
+    home: '',
     // nhung thu lay tu user
     users: {
       userName: '',
@@ -25,6 +25,7 @@ class HomePage extends React.Component {
     // nhung thu lay tu san pham
     products: [
       {
+        likeclicked: false,
         userId: "",
         nameProduct: "",
         catalog_Id: "",
@@ -39,50 +40,12 @@ class HomePage extends React.Component {
     ]
   };
   componentDidMount() {
-    // axios
-    //   .get(`${config.baseUrl}/api/product2`)
-    //   .then(response => {
-    //     let data = response.data;
-    //     for (let i = 0; i < data.length; i++) {
-    //       this.setState({
-    //         products: [
-    //           ...this.state.products,
-    //           {
-    //             // userId: [data[i].user_Id],
-    //             // nameProduct: [data[i].name],
-    //             // catalog_Id: [data[i].catalog_Id],
-    //             // price: [data[i].price],
-    //             // discount: [data[i].discount],
-    //             // info: [data[i].info],
-    //             // image_link: [data[i].image_link],
-    //             // createAt: [data[i].createAt],
-    //             // view: [data[i].view],
-    //             // like: [data[i].like]
 
-    //             userId: data[i].user_Id,
-    //             nameProduct: data[i].name,
-    //             catalog_Id: data[i].catalog_Id,
-    //             price: data[i].price,
-    //             discount: data[i].discount,
-    //             info: data[i].info,
-    //             image_link: data[i].image_link,
-    //             createAt: data[i].createAt,
-    //             view: data[i].view,
-    //             like: data[i].like
-    //           }
-    //         ]
-    //       });
-    //     }
-    //     this.state.products.shift();
-    //     // console.log(this.state.products);
-    //   })
-    //   .catch(error => console.log(error));
     axios.get(`${config.baseUrl}/api/user`)
       .then(response => {
         let data = response.data;
         for (let i = 0; i < data.length; i++) {
           if (data[i].email === localStorage.getItem('user')) {
-            console.log(data[i].avatarUrl)
             if (data[i].avatarUrl.search('data') === -1 && data[i].avatarUrl !== 'https://www.malverninternational.com/wp-content/uploads/2016/12/Male-Avatar.png') {
               let path = config.baseUrl + '/' + data[i].avatarUrl;
               data[i].avatarUrl = path;
@@ -122,7 +85,33 @@ class HomePage extends React.Component {
             let path = data[i].user_Id.avatarUrl;
             data[i].user_Id.avatarUrl = path;
           }
-
+          
+            
+          for (let j = 0; j < data[i].like.length; j++) {
+            
+            axios.get(`${config.baseUrl}/api/user`)
+            .then(response => {
+              let dataUser = response.data;
+              for (let k = 0; k < dataUser.length; k++) {
+                if (dataUser[k].email === localStorage.getItem('user')) {
+                  if (data[i].like[j] === dataUser[k]._id){
+                    console.log(1)
+                    // this.setState({
+                    //   likeclicked: true,
+                    // })
+                  } else {
+                    console.log(2)
+                    // this.setState({
+                    //   likeclicked: false,
+                    // })
+                  }
+                }
+                
+          // console.log(this.state)
+              }
+            })
+            .catch(error => console.log(error));
+          }
           let a = {
             userId: data[i].user_Id,
             nameProduct: data[i].name,
@@ -140,7 +129,6 @@ class HomePage extends React.Component {
         this.setState({
           products: [...tam]
         })
-        console.log(this.state);
       })
       .catch(error => console.log(error));
   }
@@ -149,12 +137,11 @@ class HomePage extends React.Component {
     const mang = this.state.products;
     mang.reverse();
     const allProduct = mang.map((ArraySP, index) => <Home key={index} ArraySP={ArraySP} />);
-    console.log(this.state)
     return (
       <div className="homePage">
         <div className="navbar2">
           <div className="navbar-area">
-            <NavBar value={this.state.home}/>
+            <NavBar value={this.state.home} />
           </div>
         </div>
         <div className="background-home">
