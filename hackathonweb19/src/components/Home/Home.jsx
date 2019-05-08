@@ -6,12 +6,26 @@ import doticon from "../../doticon.png";
 import bookmarklogo from "../../bookmarklogo.png";
 import HeartLogo from '../../heartlogo.png'
 import HeartLogoClick from '../../heartlogoclick.png'
-
+import axios from "axios";
+import config from "../../config";
+import { Button } from 'reactstrap';
 import "../../App.css";
 
 class Home extends Component {
+  like() {
+    axios.get(`${config.baseUrl}/like/${this.props.ArraySP.id}/${this.props.ArraySP.userId._id}`).then(response => { console.log(response) }).catch((error) => {
+      console.log(error);
+    });
+    this.props.ArraySP.likeclicked = true;
+  }
+
+  dislike() {
+    axios.get(`${config.baseUrl}/dislike/${this.props.ArraySP.id}/${this.props.ArraySP.userId._id}`).then(response => { console.log(response) }).catch((error) => {
+      console.log(error);
+    });
+    this.props.ArraySP.likeclicked = false;
+  }
   render() {
-    console.log(this.props.ArraySP)
     return (
       <div className='product'>
         <div className="content-product">
@@ -33,13 +47,17 @@ class Home extends Component {
             <div className="infoProduct-icon">
               <div className="icon-like">
                 {this.props.ArraySP.likeclicked ?
-                  <img src={HeartLogoClick}
-                    alt='heartlogoclick'
-                    style={{ height: '40 px', width: '40px' }} />
+                  <Button onClick={() => this.dislike()} className='dis-like-click' style={{ borderColor: ' white', backgroundColor: 'white', padding:'0px' }}>
+                    <img src={HeartLogoClick}
+                      alt='heartlogoclick'
+                      style={{ height: '40 px', width: '40px' }} />
+                  </Button>
                   :
-                  <img src={HeartLogo}
-                    alt='heartlogo'
-                    style={{ height: '40 px', width: '40px' }} />
+                  <Button onClick={() => this.like()} className='like-click' style={{ borderColor: ' white', backgroundColor: 'white', padding:'0px'  }}>
+                    <img src={HeartLogo}
+                      alt='heartlogo'
+                      style={{ height: '40 px', width: '40px' }} />
+                  </Button>
                 }
                 {/* <img src={likelogo} alt="like" /> */}
               </div>

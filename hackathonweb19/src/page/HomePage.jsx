@@ -25,6 +25,7 @@ class HomePage extends React.Component {
     // nhung thu lay tu san pham
     products: [
       {
+        id:'',
         likeclicked: false,
         userId: "",
         nameProduct: "",
@@ -175,6 +176,7 @@ class HomePage extends React.Component {
           // }
 
           let a = {
+            id:data[i]._id,
             likeclicked: false,
             userId: data[i].user_Id,
             nameProduct: data[i].name,
