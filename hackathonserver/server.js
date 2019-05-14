@@ -26,6 +26,9 @@ mongoose.connect('mongodb://localhost:27017/hackathonweb19', (err) => {
         origin: ['http://localhost:3000']
     }))
 
+
+
+    
     app.get("/api/user", async (req, res) => {
         userModel.find({}, function (err, user) {
             if (err) {
