@@ -25,6 +25,7 @@ class HomePage extends React.Component {
     // nhung thu lay tu san pham
     products: [
       {
+        userLoginId:'',
         id: '',
         likeclicked: false,
         userId: "",
@@ -72,7 +73,7 @@ class HomePage extends React.Component {
   }
 
   setDataForLikeClick() {
-    const currentData = this.state.products;
+    // const currentData = this.state.products;
     axios.get(`${config.baseUrl}/api/user`)
       .then(responseUser => {
         let dataUser = responseUser.data;
@@ -93,6 +94,10 @@ class HomePage extends React.Component {
           item.like.map(likeItem => {
             if (likeItem === currentId[0].id) {
               currentProduct[index].likeclicked = true;
+              currentProduct[index].userLoginId = currentId[0].id;
+            } else {
+              currentProduct[index].likeclicked = false;
+              currentProduct[index].userLoginId = currentId[0].id;
             }
           })
         })
@@ -143,6 +148,7 @@ class HomePage extends React.Component {
     this.setState({
       products: result
     })
+    console.log(result.reverse())
 
   }
 
@@ -154,6 +160,7 @@ class HomePage extends React.Component {
 
   render() {
     const mang = this.state.products;
+    console.log(mang)
     mang.reverse();
     const allProduct = mang.map((ArraySP, index) => <Home key={index} ArraySP={ArraySP} />);
     return (
